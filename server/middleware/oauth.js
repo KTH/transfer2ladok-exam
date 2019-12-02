@@ -33,15 +33,15 @@ async function getAccessData (redirectUrl, code) {
 }
 
 const oauth1 = redirectPath =>
-  function oauth1Middleware (req, res, next) {
+  function oauth1Middleware (req, res) {
     if (!req.body) {
       skog.warn({ req }, 'Missing body in the request')
-      return next(new ClientError('missing_body', ''))
+      throw new ClientError('missing_body', '')
     }
 
     if (!req.body.custom_canvas_course_id) {
       skog.warn({ req }, 'Body attribute "custom_canvas_course_id" missing')
-      return next(new ClientError('missing_attribute', ''))
+      throw new ClientError('missing_attribute', '')
     }
 
     const callbackUrl = new URL(
