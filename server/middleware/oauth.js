@@ -34,22 +34,28 @@ async function getAccessData (redirectUrl, code) {
 
 const oauth1 = redirectPath =>
   function oauth1Middleware (req, res) {
-    if (!req.body) {
-      log.warn({ req }, 'Missing body in the request')
-      throw new ClientError('missing_body', '')
-    }
+    if (!req.body)
+      throw new ClientError(
+        'missing_body',
+        'Missing body in the request. Probably the page has been accessed outside from Canvas'
+      )
 
-    if (!req.body.custom_canvas_course_id) {
-      log.warn({ req }, 'Body attribute "custom_canvas_course_id" missing')
-      throw new ClientError('missing_attribute', '')
-    }
+    if (!req.body.custom_canvas_course_id)
+      throw new ClientError(
+        'missing_attribute',
+        'Missing attribute "custom_canvas_course_id". Probably the page has been accessed outside from Canvas'
+      )
+
+    const courseId = req.body.custom_canvas_course_id
+    log.info(`App launched for course ${courseId}`)
 
     const callbackUrl = new URL(
       `${req.baseUrl}${redirectPath}`,
       process.env.PROXY_BASE
     )
+
     callbackUrl.search = querystring.stringify({
-      course_id: req.body.custom_canvas_course_id
+      course_id: courseId
     })
 
     log.info('Next URL will be %s', callbackUrl)
@@ -68,41 +74,29 @@ const oauth1 = redirectPath =>
 
 const oauth2 = redirectPath =>
   async function oauth2Middleware (req, res, next) {
-    if (!req.query || !req.query.course_id) {
-      return next(
-        new ClientError(
-          'missing_query_parameters',
-          'Missing query parameter [course_id]'
-        )
+    if (!req.query || !req.query.course_id)
+      throw new ClientError(
+        'missing_query_parameters',
+        'Missing query parameter [course_id]'
       )
-    }
 
-    if (req.query.error && req.query.error === 'access_denied') {
-      return next(
-        new ClientError(
-          'access_denied',
-          'The user has not authorized the app. Obtained query parameter [error=access_denied]'
-        )
+    if (req.query.error && req.query.error === 'access_denied')
+      throw new ClientError(
+        'access_denied',
+        'The user has not authorized the app. Obtained query parameter [error=access_denied]'
       )
-    }
 
-    if (req.query.error) {
-      return next(
-        new ClientError(
-          'unknown_oauth_error',
-          `Unexpected query parameter [error=${req.query.error}] received from Canvas`
-        )
+    if (req.query.error)
+      throw new ClientError(
+        'unknown_oauth_error',
+        `Unexpected query parameter [error=${req.query.error}] received from Canvas`
       )
-    }
 
-    if (!req.query.code) {
-      return next(
-        new ClientError(
-          'access_denied',
-          'The user has not authorized the app. Missing query parameter [code]'
-        )
+    if (!req.query.code)
+      throw new ClientError(
+        'access_denied',
+        'The user has not authorized the app. Missing query parameter [code]'
       )
-    }
 
     let accessData
     try {
