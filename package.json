@@ -1,0 +1,20 @@
+{
+  "name": "lms-export-to-ladok-2",
+  "version": "1.0.0",
+  "description": "Send results of an assignment in Canvas LMS as module in Ladok",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "node . | bunyan -o short"
+  },
+  "keywords": [],
+  "author": "KTH Royal Institute of Technology",
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "skog": "^1.0.0-alpha.1"
+  }
+}
