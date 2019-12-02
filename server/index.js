@@ -7,6 +7,7 @@ const system = require('./middleware/system')
 const { oauth1, oauth2 } = require('./middleware/oauth')('/export2')
 const authorization = require('./middleware/authorization')
 const { showForm, submitForm } = require('./middleware/export-to-ladok')
+const cuid = require('cuid')
 
 const server = express()
 server.set('views', __dirname + '/views')
@@ -15,6 +16,10 @@ server.set('view engine', 'handlebars')
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
+
+server.use((req, res, next) => {
+  log.child({ req_id: cuid() }, next)
+})
 
 const PROXY_PATH = process.env.PROXY_PATH || ''
 

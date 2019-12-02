@@ -15,6 +15,7 @@
   "dependencies": {
     "@kth/canvas-api": "^2.1.0",
     "bunyan": "^1.8.12",
+    "cuid": "^2.1.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
