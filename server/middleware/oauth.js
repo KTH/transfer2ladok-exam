@@ -45,7 +45,9 @@ function oauth1 (redirectPath) {
   }
 }
 
-async function oauth2 (req, res, next) {}
+async function oauth2 (req, res, next) {
+  res.send('Hello back!')
+}
 
 module.exports = {
   oauth1,
