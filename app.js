@@ -5,7 +5,7 @@ require('skog/bunyan').createLogger({
 })
 
 const skog = require('skog')
-const server = require('express')()
+const server = require('./server')
 
 server.listen(process.env.PORT || 3000, () => {
   skog.info(
