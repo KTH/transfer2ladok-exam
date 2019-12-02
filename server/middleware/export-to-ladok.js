@@ -1,14 +1,16 @@
+const canvas = require('../../lib/canvas')
+
 async function showForm (req, res) {
-  const canvas = [
-    { id: '1', name: 'Assignment 1' },
-    { id: '2', name: 'Assignment 2' }
-  ]
+  const canvasAssignments = await canvas.getAssignments(
+    req.query.course_id,
+    req.accessData.token
+  )
 
   const ladok = [
     { id: 'xxx', name: 'MOD1' },
     { id: 'xxx', name: 'MOD2' }
   ]
-  res.render('form', { canvas, ladok, layout: false })
+  res.render('form', { canvas: canvasAssignments, ladok, layout: false })
 }
 
 async function submitForm (req, res) {
