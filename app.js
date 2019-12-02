@@ -1,7 +1,8 @@
 require('dotenv').config()
 require('skog/bunyan').createLogger({
   name: 'lms-export-to-ladok-2',
-  app: 'lms-export-to-ladok-2'
+  app: 'lms-export-to-ladok-2',
+  serializers: require('bunyan').stdSerializers
 })
 require('./lib/ladok-api').init()
 
