@@ -9,13 +9,21 @@
 <body>
   <form method="post">
     <h2>Choose a Canvas assignment</h2>
-    <select></select>
+    <select name="canvas_assignment">
+      {{#each canvas}}
+        <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
 
     <h2>Choose a Ladok module</h2>
-    <select></select>
+    <select name="ladok_module">
+      {{#each ladok}}
+        <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
 
     <h2>Write the examination date</h2>
-    <input type="date">
+    <input type="date" name="examination_date">
 
     <button type="submit">Export to Ladok</button>
   </form>
