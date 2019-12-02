@@ -112,14 +112,8 @@ async function oauth2 (req, res, next) {
     return next(err)
   }
 
-  if (accessData.realUserId && accessData.userId === accessData.realUserId) {
-    throw new ClientError(
-      'not_allowed',
-      'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
-    )
-  }
-
-  res.send(`Hello back! ${accessData.user} - ${accessData.token}`)
+  req.accesData = accessData
+  next()
 }
 
 module.exports = {

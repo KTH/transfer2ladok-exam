@@ -13,7 +13,9 @@ const PROXY_PATH = process.env.PROXY_PATH || ''
 // Define the router as map between routes and a set of middleware
 const router = express.Router()
 router.post('/export', oauth1('/export2'))
-router.get('/export2', oauth2)
+router.get('/export2', oauth2, (req, res) => {
+  res.send('Hello back!')
+})
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
