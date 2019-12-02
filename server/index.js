@@ -1,7 +1,7 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const Router = require('express-promise-router')
-
+const log = require('skog')
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
 const { oauth1, oauth2 } = require('./middleware/oauth')('/export2')
@@ -28,4 +28,8 @@ router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
 
 server.use(PROXY_PATH, router)
+server.use(function catchAll (err, req, res, next) {
+  log.error({ req, res, err })
+  res.send('An error ocurred! :(')
+})
 module.exports = server
