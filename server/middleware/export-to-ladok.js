@@ -1,4 +1,8 @@
-const { getCanvasAssignments, getLadokModules } = require('../../lib')
+const {
+  getCanvasAssignments,
+  getLadokModules,
+  sendGradesToLadok
+} = require('../../lib')
 
 async function showForm (req, res) {
   const canvasAssignments = await getCanvasAssignments(
@@ -14,13 +18,22 @@ async function showForm (req, res) {
   res.render('form', {
     canvas: canvasAssignments,
     ladok: ladokModules,
+    token: req.accessData.token,
+    course_id: req.query.course_id,
     layout: false
   })
 }
 
 async function submitForm (req, res) {
   console.log(req.body)
-  res.send('Hello form')
+  await sendGradesToLadok(
+    req.body.course_id,
+    req.body.canvas_assignment,
+    req.body.ladok_module,
+    req.body.examination_date,
+    req.body.access_token
+  )
+  res.send('Done!!1!')
 }
 
 module.exports = {
