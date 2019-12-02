@@ -25,8 +25,6 @@ async function getAccessData (redirectUrl, code) {
     }
   }).json()
 
-  console.log(body)
-
   return {
     token: body.access_token,
     userId: body.user.id,

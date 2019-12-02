@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const system = require('./middleware/system')
 const { oauth1, oauth2 } = require('./middleware/oauth')('/export2')
 const authorization = require('./middleware/authorization')
+const { showForm, submitForm } = require('./middleware/export-to-ladok')
 
 const server = express()
 
@@ -14,9 +15,8 @@ const PROXY_PATH = process.env.PROXY_PATH || ''
 // Define the router as map between routes and a set of middleware
 const router = express.Router()
 router.post('/export', oauth1)
-router.get('/export2', oauth2, authorization, (req, res) => {
-  res.send('Hello back!')
-})
+router.get('/export2', oauth2, authorization, showForm)
+router.post('/export3', submitForm)
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
