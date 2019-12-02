@@ -1,4 +1,4 @@
-const skog = require('skog')
+const log = require('skog')
 const querystring = require('querystring')
 const { URL } = require('url')
 const got = require('got')
@@ -35,12 +35,12 @@ async function getAccessData (redirectUrl, code) {
 const oauth1 = redirectPath =>
   function oauth1Middleware (req, res) {
     if (!req.body) {
-      skog.warn({ req }, 'Missing body in the request')
+      log.warn({ req }, 'Missing body in the request')
       throw new ClientError('missing_body', '')
     }
 
     if (!req.body.custom_canvas_course_id) {
-      skog.warn({ req }, 'Body attribute "custom_canvas_course_id" missing')
+      log.warn({ req }, 'Body attribute "custom_canvas_course_id" missing')
       throw new ClientError('missing_attribute', '')
     }
 
@@ -52,7 +52,7 @@ const oauth1 = redirectPath =>
       course_id: req.body.custom_canvas_course_id
     })
 
-    skog.info('Next URL will be %s', callbackUrl)
+    log.info('Next URL will be %s', callbackUrl)
 
     const url = new URL('/login/oauth2/auth', process.env.CANVAS_HOST)
     url.search = querystring.stringify({
@@ -61,7 +61,7 @@ const oauth1 = redirectPath =>
       redirect_uri: callbackUrl.toString()
     })
 
-    skog.info('Redirecting to %s...', url)
+    log.info('Redirecting to %s', url)
 
     res.redirect(url)
   }
@@ -113,7 +113,7 @@ const oauth2 = redirectPath =>
 
       accessData = await getAccessData(callbackUrl.toString(), req.query.code)
     } catch (err) {
-      skog.error(err, 'Could not get access data from Canvas.')
+      log.error(err, 'Could not get access data from Canvas.')
       return next(err)
     }
 
