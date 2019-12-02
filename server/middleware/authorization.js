@@ -10,10 +10,12 @@ module.exports = async function authorization (req, res, next) {
   }
 
   if (accessData.realUserId && accessData.userId === accessData.realUserId) {
-    return next(new ClientError(
-      'not_allowed',
-      'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
-    ))
+    return next(
+      new ClientError(
+        'not_allowed',
+        'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
+      )
+    )
   }
 
   try {

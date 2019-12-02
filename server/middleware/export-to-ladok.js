@@ -1,5 +1,5 @@
 async function showForm (req, res) {
-  res.send('Hello World')
+  res.render('form', { layout: false })
 }
 
 async function submitForm (req, res) {
