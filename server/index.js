@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')
+const { oauth1, oauth2 } = require('./middleware/oauth')('/export2')
+const authorization = require('./middleware/authorization')
 
 const server = express()
 
@@ -12,8 +13,8 @@ const PROXY_PATH = process.env.PROXY_PATH || ''
 
 // Define the router as map between routes and a set of middleware
 const router = express.Router()
-router.post('/export', oauth1('/export2'))
-router.get('/export2', oauth2, (req, res) => {
+router.post('/export', oauth1)
+router.get('/export2', oauth2, authorization, (req, res) => {
   res.send('Hello back!')
 })
 
