@@ -94,24 +94,16 @@ const oauth2 = redirectPath =>
 
     if (!req.query.code)
       throw new ClientError(
-        'access_denied',
-        'The user has not authorized the app. Missing query parameter [code]'
+        'unknown_oauth_error',
+        'Missing query parameter [code]'
       )
 
-    let accessData
-    try {
-      const callbackUrl = new URL(
-        `${req.baseUrl}${redirectPath}`,
-        process.env.PROXY_BASE
-      )
+    const callbackUrl = new URL(
+      `${req.baseUrl}${redirectPath}`,
+      process.env.PROXY_BASE
+    )
 
-      accessData = await getAccessData(callbackUrl.toString(), req.query.code)
-    } catch (err) {
-      log.error(err, 'Could not get access data from Canvas.')
-      return next(err)
-    }
-
-    req.accessData = accessData
+    req.accessData = await getAccessData(callbackUrl.toString(), req.query.code)
     next()
   }
 
