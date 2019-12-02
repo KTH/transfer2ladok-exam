@@ -4,7 +4,8 @@
   "description": "Send results of an assignment in Canvas LMS as module in Ladok",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "prettier-standard --lint --check \"**/*.{js,md,yml,json}\"",
+    "format": "prettier-standard \"**/*.{js,md,yml,json}\"",
     "start": "node .",
     "dev": "node . | bunyan -o short"
   },
@@ -16,5 +17,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "skog": "^1.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "prettier-standard": "^16.0.0"
   }
 }
