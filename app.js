@@ -7,9 +7,9 @@ require('skog/bunyan').createLogger({
 const skog = require('skog')
 const server = require('./server')
 
-server.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3001, () => {
   skog.info(
     'Server started. Go to http://localhost:%s',
-    process.env.PORT || 3000
+    process.env.PORT || 3001
   )
 })
