@@ -1,5 +1,6 @@
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
+const Router = require('express-promise-router')
 
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
@@ -18,7 +19,7 @@ server.use(bodyParser.urlencoded({ extended: true }))
 const PROXY_PATH = process.env.PROXY_PATH || ''
 
 // Define the router as map between routes and a set of middleware
-const router = express.Router()
+const router = Router()
 router.post('/export', oauth1)
 router.get('/export2', oauth2, authorization, showForm)
 router.post('/export2', submitForm)
