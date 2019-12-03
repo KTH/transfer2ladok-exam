@@ -9,7 +9,7 @@ async function startPage (req, res) {
     throw new Error()
   }
 
-  res.render('start-page', {
+  res.render('start', {
     next: `${process.env.PROXY_PATH}/export2`,
     custom_canvas_course_id: req.body.custom_canvas_course_id,
     layout: false
@@ -45,7 +45,7 @@ async function submitForm (req, res) {
     req.body.examination_date,
     req.body.access_token
   )
-  res.send('Done!!1!')
+  res.render('feedback', { layout: false })
 }
 
 module.exports = {
