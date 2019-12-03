@@ -4,9 +4,9 @@ const Router = require('express-promise-router')
 const log = require('skog')
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')('/export2')
+const { oauth1, oauth2 } = require('./middleware/oauth')('/export3 ')
 const authorization = require('./middleware/authorization')
-const { showForm, submitForm } = require('./middleware/export-to-ladok')
+const { startPage, showForm, submitForm } = require('./middleware/export-to-ladok')
 const cuid = require('cuid')
 
 const server = express()
@@ -25,9 +25,10 @@ const PROXY_PATH = process.env.PROXY_PATH || ''
 
 // Define the router as map between routes and a set of middleware
 const router = Router()
-router.post('/export', oauth1)
-router.get('/export2', oauth2, authorization, showForm)
-router.post('/export2', submitForm)
+router.post('/export', startPage)
+router.post('/export2', oauth1)
+router.get('/export3', oauth2, authorization, showForm)
+router.post('/export3', submitForm)
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)

@@ -4,6 +4,18 @@ const {
   sendGradesToLadok
 } = require('../../lib')
 
+async function startPage (req, res) {
+  if (!req.body || !req.body.custom_canvas_course_id) {
+    throw new Error()
+  }
+
+  res.render('start-page', {
+    next: `${process.env.PROXY_PATH}/export2`,
+    custom_canvas_course_id: req.body.custom_canvas_course_id,
+    layout: false
+  })
+}
+
 async function showForm (req, res) {
   const canvasAssignments = await getCanvasAssignments(
     req.query.course_id,
@@ -37,6 +49,7 @@ async function submitForm (req, res) {
 }
 
 module.exports = {
+  startPage,
   showForm,
   submitForm
 }
