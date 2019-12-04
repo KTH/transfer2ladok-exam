@@ -2,9 +2,10 @@ require('dotenv').config()
 require('skog/bunyan').createLogger({
   name: 'lms-export-to-ladok-2',
   app: 'lms-export-to-ladok-2',
-  serializers: require('bunyan').stdSerializers
+  serializers: require('bunyan').stdSerializers,
+  level: process.env.LOG_LEVEL || 'info'
 })
-require('./lib/ladok-api').init()
+require('./lib/ladok/api').init()
 
 const skog = require('skog')
 const server = require('./server')

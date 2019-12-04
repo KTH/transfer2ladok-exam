@@ -3,6 +3,7 @@ const {
   getLadokModules,
   sendGradesToLadok
 } = require('../../lib')
+const log = require('skog')
 
 async function startPage (req, res) {
   if (!req.body || !req.body.custom_canvas_course_id) {
@@ -37,7 +38,9 @@ async function showForm (req, res) {
 }
 
 async function submitForm (req, res) {
-  console.log(req.body)
+  log.info(
+    `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
+  )
   await sendGradesToLadok(
     req.body.course_id,
     req.body.canvas_assignment,
