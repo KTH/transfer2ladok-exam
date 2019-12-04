@@ -1,5 +1,4 @@
 const log = require('skog')
-const CanvasApi = require('@kth/canvas-api')
 const isAllowed = require('../../lib/is-allowed')
 
 module.exports = async function authorization (req, res, next) {
@@ -19,11 +18,7 @@ module.exports = async function authorization (req, res, next) {
   }
 
   try {
-    const canvas = CanvasApi(
-      `${process.env.CANVAS_HOST}/api/v1`,
-      accessData.token
-    )
-    const allowedInLadok = await isAllowed.isAllowedInLadok(canvas)
+    const allowedInLadok = await isAllowed.isAllowedInLadok(accessData.token)
     if (!allowedInLadok) {
       return next(
         new ClientError(
@@ -33,7 +28,7 @@ module.exports = async function authorization (req, res, next) {
       )
     }
     const allowedIncanvas = await isAllowed.isAllowedInCanvas(
-      canvas,
+      accessData.token,
       req.query.course_id
     )
 

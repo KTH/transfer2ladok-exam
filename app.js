@@ -6,6 +6,7 @@ require('skog/bunyan').createLogger({
   level: process.env.LOG_LEVEL || 'info'
 })
 require('./lib/ladok/api').init()
+require('./lib/mongo').init()
 
 const skog = require('skog')
 const server = require('./server')
