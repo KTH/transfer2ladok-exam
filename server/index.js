@@ -2,6 +2,7 @@ const express = require('express')
 const expressHandlebars = require('express-handlebars')
 const Router = require('express-promise-router')
 const log = require('skog')
+const path = require('path')
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
 const { oauth1, oauth2 } = require('./middleware/oauth')('/export3 ')
@@ -29,6 +30,18 @@ const PROXY_PATH = process.env.PROXY_PATH || ''
 
 // Define the router as map between routes and a set of middleware
 const router = Router()
+
+if (process.env.NODE_ENV === 'development') {
+  const Bundler = require('parcel-bundler')
+
+  const file = path.resolve(process.cwd(), 'client/index.js')
+  const options = {}
+
+  const bundler = new Bundler(file, options)
+  router.use('/dist', bundler.middleware())
+} else {
+  router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
+}
 router.post('/export', startPage)
 router.post('/export2', oauth1)
 router.get('/export3', oauth2, authorization, showForm)
