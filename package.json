@@ -7,6 +7,7 @@
     "test": "prettier-standard --lint --check \"**/*.{js,md,yml,json}\"",
     "format": "prettier-standard \"**/*.{js,md,yml,json}\"",
     "start": "node .",
+    "debug": "node --inspect-brk .",
     "dev": "node . | bunyan -o short"
   },
   "keywords": [],
@@ -20,7 +21,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-promise-router": "^3.0.3",
-    "got": "^10.0.1",
+    "got": "^9.6.0",
     "memoizee": "^0.4.14",
     "mongodb": "^3.3.5",
     "skog": "^1.0.0-alpha.1"
