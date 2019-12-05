@@ -80,7 +80,12 @@ async function listCourseData (req, res) {
 }
 
 async function listGradesData (req, res) {
-  const data = await getGrades(req.query.course_id, req.query.assignment_id, req.query.module_id, req.accessData.token)
+  const data = await getGrades(
+    req.query.course_id,
+    req.query.assignment_id,
+    req.query.module_id,
+    req.accessData.token
+  )
   res.send(data)
 }
 
