@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  api:
+    # Existing image in repository
+    # image: kthse/docker pull kthse/kth-nodejs-api:13.37
+
+    # Build from Dockerfile in current directory
+    build: .
+
+    # Always use production here, otherwise the container will fail.
+    # The reason for this is that we use dev dependencies to get webpack dev server working,
+    # and these will not be included if NODE_ENV == production.
+    # And for real: would we ever want to run a docker container with hot reloading of code?
+    environment:
+      NODE_ENV: production
+
+    env_file:
+      - ./.env
+
+    # Port published from inside the Docker image
+    ports:
+      - 3001:3001
