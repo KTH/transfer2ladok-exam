@@ -32,6 +32,7 @@ server.use((req, res, next) => {
 const PROXY_PATH = process.env.PROXY_PATH || ''
 
 // Define the router as map between routes and a set of middleware
+const apiRouter = Router()
 const router = Router()
 
 if (process.env.NODE_ENV === 'development') {
@@ -53,6 +54,12 @@ router.post('/export3', submitForm)
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
+router.use('/api', apiRouter)
+
+apiRouter.use(authorization)
+apiRouter.get('/course-info', (req, res) => {
+  res.send({ hello: 'World' })
+})
 
 server.use(PROXY_PATH, router)
 server.use(function catchAll (err, req, res, next) {
