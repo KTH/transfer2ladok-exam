@@ -43,6 +43,7 @@ function App ({ courseId }) {
 
   return (
     <div>
+      <h2>Canvas assignment</h2>
       <select name='canvas_assignment'>
         {data.canvasAssignments.map(assignment => (
           <option key={assignment.id} value={assignment.id}>
@@ -50,6 +51,7 @@ function App ({ courseId }) {
           </option>
         ))}
       </select>
+      <h2>Ladok Module</h2>
       <select name='ladok_module'>
         {data.ladokModules.map(ladokModule => (
           <option key={ladokModule.id} value={ladokModule.id}>
@@ -57,6 +59,8 @@ function App ({ courseId }) {
           </option>
         ))}
       </select>
+      <h2>Examination Date</h2>
+      <input name="examination_date" type="date" />
     </div>
   )
 }
