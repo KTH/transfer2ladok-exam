@@ -3,14 +3,10 @@ const expressHandlebars = require('express-handlebars')
 const Router = require('express-promise-router')
 const log = require('skog')
 const bodyParser = require('body-parser')
-const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')('/export3 ')
-const authorization = require('./middleware/authorization')
-const {
-  startPage,
-  showForm,
-  submitForm
-} = require('./middleware/export-to-ladok')
+const system = require('./system')
+const { oauth1, oauth2 } = require('./oauth')('/export3 ')
+const authorization = require('./authorization')
+const { startPage, showForm, submitForm } = require('./export-to-ladok')
 const cuid = require('cuid')
 
 const server = express()
