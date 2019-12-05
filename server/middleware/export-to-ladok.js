@@ -29,6 +29,7 @@ async function showForm (req, res) {
   )
 
   res.render('form', {
+    prefix_path: process.env.PROXY_PATH,
     canvas: canvasAssignments,
     ladok: ladokModules,
     token: req.accessData.token,
