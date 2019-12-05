@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "prettier-standard --lint --check \"**/*.{js,md,yml,json}\"",
+    "build": "echo TODO:implement this",
     "format": "prettier-standard \"**/*.{js,md,yml,json}\"",
     "start": "node .",
     "debug": "node --inspect-brk .",
