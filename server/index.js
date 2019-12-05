@@ -5,7 +5,7 @@ const log = require('skog')
 const path = require('path')
 const bodyParser = require('body-parser')
 const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')('/export3 ')
+const { oauth1, oauth2 } = require('./middleware/oauth')('/export3')
 const authorization = require('./middleware/authorization')
 const {
   startPage,
