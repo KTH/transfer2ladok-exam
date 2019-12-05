@@ -5,6 +5,8 @@ async function authorize (req, res, next) {
   const accessData = req.accessData || req.signedCookies.access_data
   const courseId = req.query.course_id || req.body.courseId
 
+  req.accessData = accessData
+
   if (!accessData) {
     return next(new Error('No access data found'))
   }

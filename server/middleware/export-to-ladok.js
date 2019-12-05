@@ -1,7 +1,8 @@
 const {
   getCanvasAssignments,
   getLadokModules,
-  sendGradesToLadok
+  sendGradesToLadok,
+  getGrades
 } = require('../../lib')
 const log = require('skog')
 
@@ -78,10 +79,16 @@ async function listCourseData (req, res) {
   })
 }
 
+async function listGradesData (req, res) {
+  const data = await getGrades(req.query.course_id, req.query.assignment_id, req.query.module_id, req.accessData.token)
+  res.send(data)
+}
+
 module.exports = {
   startPage,
   showForm,
   showTestForm,
   submitForm,
-  listCourseData
+  listCourseData,
+  listGradesData
 }

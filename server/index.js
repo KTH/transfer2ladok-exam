@@ -13,7 +13,8 @@ const {
   showForm,
   showTestForm,
   submitForm,
-  listCourseData
+  listCourseData,
+  listGradesData
 } = require('./middleware/export-to-ladok')
 const cuid = require('cuid')
 
@@ -59,6 +60,7 @@ router.use('/api', apiRouter)
 
 apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
+apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH, router)
 server.use(function catchAll (err, req, res, next) {
