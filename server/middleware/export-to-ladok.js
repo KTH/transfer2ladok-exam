@@ -5,6 +5,12 @@ const {
 } = require('../../lib')
 const log = require('skog')
 
+async function rootPage (req, res) {
+  res.render('root', {
+    layout: false
+  })
+}
+
 async function startPage (req, res) {
   if (!req.body || !req.body.custom_canvas_course_id) {
     throw new Error()
@@ -52,6 +58,7 @@ async function submitForm (req, res) {
 }
 
 module.exports = {
+  rootPage,
   startPage,
   showForm,
   submitForm
