@@ -12,7 +12,8 @@ const {
   startPage,
   showForm,
   showTestForm,
-  submitForm
+  submitForm,
+  listCourseData
 } = require('./middleware/export-to-ladok')
 const cuid = require('cuid')
 
@@ -43,23 +44,21 @@ if (process.env.NODE_ENV === 'development') {
 
   const bundler = new Bundler(file, options)
   router.use('/dist', bundler.middleware())
-  router.get('/test', showTestForm)
+  router.get('/test', authorization.setAdminCookie, showTestForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
 router.post('/export', startPage)
 router.post('/export2', oauth1)
-router.get('/export3', oauth2, authorization, showForm)
+router.get('/export3', oauth2, authorization.authorize, showForm)
 router.post('/export3', submitForm)
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
 router.use('/api', apiRouter)
 
-apiRouter.use(authorization)
-apiRouter.get('/course-info', (req, res) => {
-  res.send({ hello: 'World' })
-})
+apiRouter.use(authorization.authorize)
+apiRouter.get('/course-info', listCourseData)
 
 server.use(PROXY_PATH, router)
 server.use(function catchAll (err, req, res, next) {

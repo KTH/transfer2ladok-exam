@@ -1,25 +1,54 @@
 import React, { useState, useEffect } from 'react'
 
-function App ({ courseId }) {
-  async function fetchData () {
-    const result = await window.fetch(`api/course-info?course_id=${courseId}`)
-      .then(r => r.json())
-    console.log(result)
-  }
+function useFetch (url) {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
 
-  const [assignments, setAssignments] = useState([1])
+  async function fetchData () {
+    window.fetch(url)
+      .then(r => {
+        if (!r.ok) {
+          throw new Error(r.statusText)
+        }
+        return r
+      })
+      .then(r => r.json())
+      .then(body => {
+        setData(body)
+        setLoading(false)
+      })
+      .catch(r => {
+        setError(r)
+        setLoading(false)
+      })
+  }
 
   useEffect(() => {
     fetchData()
-  })
+  }, [])
+
+  return {loading, error, data}
+}
+
+function App ({ courseId }) {
+  const {loading, error, data } = useFetch(`api/course-info?course_id=${courseId}`)
+
+  if (loading) return (
+    <div>Loading...</div>
+  )
+
+  if (error) return (
+    <div>Error</div>
+  )
 
   return (
     <div>
       <select name='canvas_assignment'>
         {
-          assignments.map(assignment => (
-            <option key={assignment} value={assignment}>
-              {assignment}
+          data.canvasAssignments.map(assignment => (
+            <option key={assignment.id} value={assignment.id}>
+              {assignment.name}
             </option>
           ))
         }
