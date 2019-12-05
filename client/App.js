@@ -50,6 +50,10 @@ function App ({ courseId }) {
       <h2>Examination Date</h2>
       <input name='examination_date' type='date' />
 
+      <h2>Click to export</h2>
+      <button type="submit">Export to Ladok</button>
+
+      <h2>Here you can see the grades of the selected assignment/module</h2>
       {
         showTable && <Table course={courseId} assignment={selectedAssignment} module={selectedModule} />
       }
