@@ -12,10 +12,11 @@ class ClientError extends Error {
 }
 
 async function getAccessData (redirectUrl, code) {
-  const body = await got({
+  const { body } = await got({
     method: 'POST',
     url: `${process.env.CANVAS_HOST}/login/oauth2/token`,
-    json: {
+    json: true,
+    body: {
       grant_type: 'authorization_code',
       client_id: process.env.CANVAS_CLIENT_ID,
       client_secret: process.env.CANVAS_CLIENT_SECRET,
@@ -23,7 +24,7 @@ async function getAccessData (redirectUrl, code) {
       code: code,
       replace_tokens: true
     }
-  }).json()
+  })
 
   return {
     token: body.access_token,
