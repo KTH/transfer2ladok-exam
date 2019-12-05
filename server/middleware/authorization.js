@@ -2,7 +2,8 @@ const log = require('skog')
 const isAllowed = require('../../lib/is-allowed')
 
 module.exports = async function authorization (req, res, next) {
-  const accessData = req.accessData
+
+  const accessData = req.accessData || req.signedCookies.access_data
 
   if (!accessData) {
     return next(new Error('No access data found'))

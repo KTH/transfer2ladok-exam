@@ -4,6 +4,7 @@ const Router = require('express-promise-router')
 const log = require('skog')
 const path = require('path')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const system = require('./middleware/system')
 const { oauth1, oauth2 } = require('./middleware/oauth')('/export3')
 const authorization = require('./middleware/authorization')
@@ -22,6 +23,7 @@ server.set('view engine', 'handlebars')
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
+server.use(cookieParser(process.env.COOKIE_SIGNATURE_SECRET))
 
 server.use((req, res, next) => {
   log.child({ req_id: cuid() }, next)
