@@ -37,30 +37,46 @@ function App ({ courseId }) {
     `api/course-info?course_id=${courseId}`
   )
 
-  if (loading) return <div>Loading...</div>
+  const [selectedAssignment, setAssignment] = useState(null)
+  const [selectedModule, setModule] = useState(null)
 
+  if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
+
+  const allAssignments = [
+    { id: 0, name: 'Choose an assignment in Canvas' }
+  ].concat(data.canvasAssignments)
+
+  const allModules = [{ id: 0, name: 'Choose a module in Ladok' }].concat(
+    data.ladokModules
+  )
 
   return (
     <div>
       <h2>Canvas assignment</h2>
-      <select name='canvas_assignment'>
-        {data.canvasAssignments.map(assignment => (
+      <select
+        name='canvas_assignment'
+        onChange={event => setAssignment(event.target.value)}
+      >
+        {allAssignments.map(assignment => (
           <option key={assignment.id} value={assignment.id}>
             {assignment.name}
           </option>
         ))}
       </select>
       <h2>Ladok Module</h2>
-      <select name='ladok_module'>
-        {data.ladokModules.map(ladokModule => (
+      <select
+        name='ladok_module'
+        onChange={event => setModule(event.target.value)}
+      >
+        {allModules.map(ladokModule => (
           <option key={ladokModule.id} value={ladokModule.id}>
             {ladokModule.name} - {ladokModule.title}
           </option>
         ))}
       </select>
       <h2>Examination Date</h2>
-      <input name="examination_date" type="date" />
+      <input name='examination_date' type='date' />
     </div>
   )
 }
