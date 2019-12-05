@@ -1,37 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Table from './Table'
-
-function useFetch (url) {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState(null)
-
-  async function fetchData () {
-    window
-      .fetch(url)
-      .then(r => {
-        if (!r.ok) {
-          throw new Error(r.statusText)
-        }
-        return r
-      })
-      .then(r => r.json())
-      .then(body => {
-        setData(body)
-        setLoading(false)
-      })
-      .catch(r => {
-        setError(r)
-        setLoading(false)
-      })
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  return { loading, error, data }
-}
+import { useFetch } from './react-hooks'
 
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
@@ -51,6 +20,8 @@ function App ({ courseId }) {
   const allModules = [{ id: 0, name: 'Choose a module in Ladok' }].concat(
     data.ladokModules
   )
+
+  const showTable = selectedAssignment && selectedModule
 
   return (
     <div>
@@ -79,7 +50,10 @@ function App ({ courseId }) {
       <h2>Examination Date</h2>
       <input name='examination_date' type='date' />
 
-      <Table />
+      {
+        showTable && <Table course={courseId} assignment={selectedAssignment} module={selectedModule} />
+      }
+
     </div>
   )
 }
