@@ -1,7 +1,5 @@
 import React from 'react'
+import App from './App'
 import { render } from 'react-dom'
 
-console.log(window.__COURSE_ID__)
-const App = () => <div>Hello from with hot loader</div>
-
-render(<App />, document.getElementById('root'))
+render(<App courseId={window.__COURSE_ID__} />, document.getElementById('root'))
