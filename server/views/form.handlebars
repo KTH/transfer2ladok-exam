@@ -8,29 +8,13 @@
 </head>
 <body>
   <form method="post">
-    <h2>Choose a Canvas assignment</h2>
-    <select name="canvas_assignment">
-      {{#each canvas}}
-        <option value="{{id}}">{{name}}</option>
-      {{/each}}
-    </select>
-
-    <h2>Choose a Ladok module</h2>
-    <select name="ladok_module">
-      {{#each ladok}}
-        <option value="{{id}}">{{name}} - {{title}}</option>
-      {{/each}}
-    </select>
-
     <div id="root"></div>
-
-    <h2>Write the examination date</h2>
-    <input type="date" name="examination_date">
-    <input type="hidden" name="course_id" value={{course_id}} />
-    <input type="hidden" name="access_token" value={{token}} />
 
     <button type="submit">Export to Ladok</button>
   </form>
+  <script>
+    window.__COURSE_ID__ = '{{course_id}}'
+  </script>
   <script src="{{prefix_path}}/dist/index.js"></script>
 </body>
 </html>

@@ -18,20 +18,8 @@ async function startPage (req, res) {
 }
 
 async function showForm (req, res) {
-  const canvasAssignments = await getCanvasAssignments(
-    req.query.course_id,
-    req.accessData.token
-  )
-
-  const ladokModules = await getLadokModules(
-    req.query.course_id,
-    req.accessData.token
-  )
-
   res.render('form', {
     prefix_path: process.env.PROXY_PATH,
-    canvas: canvasAssignments,
-    ladok: ladokModules,
     token: req.accessData.token,
     course_id: req.query.course_id,
     layout: false
@@ -45,21 +33,8 @@ async function showTestForm (req, res) {
     return
   }
 
-  const canvasAssignments = await getCanvasAssignments(
-    req.query.course_id,
-    process.env.CANVAS_ADMIN_API_TOKEN
-  )
-
-  const ladokModules = await getLadokModules(
-    req.query.course_id,
-    process.env.CANVAS_ADMIN_API_TOKEN
-  )
-
   res.render('form', {
     prefix_path: process.env.PROXY_PATH,
-    canvas: canvasAssignments,
-    ladok: ladokModules,
-    token: process.env.CANVAS_ADMIN_API_TOKEN,
     course_id: req.query.course_id,
     layout: false
   })
@@ -79,9 +54,31 @@ async function submitForm (req, res) {
   res.render('feedback', { layout: false })
 }
 
+async function listCourseData (req, res) {
+  const courseId = req.query.course_id
+
+  log.info(`Fetching data (assignments and modules) of course ${courseId}`)
+
+  const canvasAssignments = await getCanvasAssignments(
+    courseId,
+    process.env.CANVAS_ADMIN_API_TOKEN
+  )
+
+  const ladokModules = await getLadokModules(
+    courseId,
+    process.env.CANVAS_ADMIN_API_TOKEN
+  )
+
+  res.send({
+    canvasAssignments,
+    ladokModules
+  })
+}
+
 module.exports = {
   startPage,
   showForm,
   showTestForm,
-  submitForm
+  submitForm,
+  listCourseData
 }
