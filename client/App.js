@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Table from './Table'
 
 function useFetch (url) {
   const [loading, setLoading] = useState(true)
@@ -77,6 +78,8 @@ function App ({ courseId }) {
       </select>
       <h2>Examination Date</h2>
       <input name='examination_date' type='date' />
+
+      <Table />
     </div>
   )
 }
