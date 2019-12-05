@@ -70,7 +70,10 @@ async function listCourseData (req, res) {
   )
 
   res.send({
-    canvasAssignments,
+    canvasAssignments: canvasAssignments.map(assignment => ({
+      id: assignment.id,
+      name: assignment.name
+    })),
     ladokModules
   })
 }
