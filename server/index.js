@@ -10,6 +10,7 @@ const authorization = require('./middleware/authorization')
 const {
   startPage,
   showForm,
+  showTestForm,
   submitForm
 } = require('./middleware/export-to-ladok')
 const cuid = require('cuid')
@@ -39,6 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 
   const bundler = new Bundler(file, options)
   router.use('/dist', bundler.middleware())
+  router.get('/test', showTestForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }

@@ -38,6 +38,33 @@ async function showForm (req, res) {
   })
 }
 
+/** Show a test form given a course code in req parameters */
+async function showTestForm (req, res) {
+  if (process.env.NODE_ENV !== 'development') {
+    res.status(404).end()
+    return
+  }
+
+  const canvasAssignments = await getCanvasAssignments(
+    req.query.course_id,
+    process.env.CANVAS_ADMIN_API_TOKEN
+  )
+
+  const ladokModules = await getLadokModules(
+    req.query.course_id,
+    process.env.CANVAS_ADMIN_API_TOKEN
+  )
+
+  res.render('form', {
+    prefix_path: process.env.PROXY_PATH,
+    canvas: canvasAssignments,
+    ladok: ladokModules,
+    token: process.env.CANVAS_ADMIN_API_TOKEN,
+    course_id: req.query.course_id,
+    layout: false
+  })
+}
+
 async function submitForm (req, res) {
   log.info(
     `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
@@ -55,5 +82,6 @@ async function submitForm (req, res) {
 module.exports = {
   startPage,
   showForm,
+  showTestForm,
   submitForm
 }
