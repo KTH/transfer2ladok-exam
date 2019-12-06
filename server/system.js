@@ -1,5 +1,5 @@
-const packageFile = require('../../package.json')
-const version = require('../../config/version')
+const packageFile = require('../package.json')
+const version = require('../config/version')
 
 function about (req, res) {
   res.setHeader('Content-Type', 'text/plain')
