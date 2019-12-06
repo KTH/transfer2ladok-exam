@@ -10,6 +10,9 @@ const presets = [
       },
       useBuiltIns: 'usage'
     }
+  ],
+  [
+    '@babel/react'
   ]
 ]
 

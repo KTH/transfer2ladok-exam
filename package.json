@@ -7,7 +7,7 @@
     "test": "prettier-standard --lint --check \"**/*.{js,md,yml,json}\"",
     "format": "prettier-standard \"**/*.{js,md,yml,json}\"",
     "start": "node .",
-    "build": "parcel build client/index.js",
+    "build": "NODE_ENV=production webpack",
     "debug": "NODE_ENV=development node --nolazy --inspect-brk=9229 app.js | bunyan -o short",
     "dev": "node . | bunyan -o short"
   },
@@ -37,10 +37,14 @@
     "@babel/core": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
     "nodemon": "^2.0.1",
-    "parcel-bundler": "^1.12.4",
     "prettier-standard": "16.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-middleware": "^3.7.2"
   }
 }
