@@ -3,7 +3,7 @@ const {
   getLadokModules,
   sendGradesToLadok,
   getGrades
-} = require('../../lib')
+} = require('../lib')
 const log = require('skog')
 
 async function startPage (req, res) {

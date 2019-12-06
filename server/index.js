@@ -40,7 +40,7 @@ const router = Router()
 if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack')
   const webpackDevMiddleware = require('webpack-dev-middleware')
-  const config = require('./webpack.config.js')
+  const config = require('../webpack.config.js')
   const compiler = webpack(config)
 
   router.use('/dist', webpackDevMiddleware(compiler, {
