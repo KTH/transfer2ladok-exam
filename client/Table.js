@@ -24,8 +24,8 @@ function Table ({ course, assignment, module }) {
         </tr>
       </thead>
       <tbody>
-        {sortedList.map(row => (
-          <tr>
+        {sortedList.map((row, i) => (
+          <tr key={i}>
             <td>{row.name}</td>
             <td>{row.canvasGrade}</td>
             <td>{row.ladokGrade}</td>

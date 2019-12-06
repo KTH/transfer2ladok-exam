@@ -29,7 +29,7 @@ export function useFetch (url) {
 
   useEffect(() => {
     fetchData()
-  }, url)
+  }, [url])
 
   return { loading, error, data }
 }
