@@ -5,9 +5,9 @@ const log = require('skog')
 const path = require('path')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')('/export3')
-const authorization = require('./middleware/authorization')
+const system = require('./system')
+const { oauth1, oauth2 } = require('./oauth')('/export3')
+const authorization = require('./authorization')
 const {
   startPage,
   showForm,
@@ -15,7 +15,7 @@ const {
   submitForm,
   listCourseData,
   listGradesData
-} = require('./middleware/export-to-ladok')
+} = require('./export-to-ladok')
 const cuid = require('cuid')
 
 const server = express()
@@ -33,7 +33,7 @@ server.use((req, res, next) => {
 
 const PROXY_PATH = process.env.PROXY_PATH || ''
 
-// Define the router as map between routes and a set of middleware
+// Define the router as map between routes and a set of middlewares & handlers
 const apiRouter = Router()
 const router = Router()
 
