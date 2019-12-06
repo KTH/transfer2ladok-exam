@@ -11,9 +11,7 @@ const presets = [
       useBuiltIns: 'usage'
     }
   ],
-  [
-    '@babel/react'
-  ]
+  ['@babel/react']
 ]
 
 module.exports = { presets }

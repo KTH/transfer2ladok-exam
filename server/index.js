@@ -43,9 +43,12 @@ if (process.env.NODE_ENV === 'development') {
   const config = require('../webpack.config.js')
   const compiler = webpack(config)
 
-  router.use('/dist', webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
-  }))
+  router.use(
+    '/dist',
+    webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath
+    })
+  )
   router.get('/test', authorization.setAdminCookie, showTestForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
