@@ -10,6 +10,10 @@ function Table ({ course, assignment, module }) {
 
   if (error) return <div>error</div>
 
+  const sortedList = data
+    .slice()
+    .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
+
   return (
     <table border='1'>
       <thead>
@@ -20,7 +24,7 @@ function Table ({ course, assignment, module }) {
         </tr>
       </thead>
       <tbody>
-        {data.map(row => (
+        {sortedList.map(row => (
           <tr>
             <td>{row.name}</td>
             <td>{row.canvasGrade}</td>
