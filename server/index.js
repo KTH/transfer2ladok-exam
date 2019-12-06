@@ -43,10 +43,9 @@ if (process.env.NODE_ENV === 'development') {
   const config = require('../webpack.config.js')
   const compiler = webpack(config)
 
-  router.use(
-    '/dist',
+  server.use(
     webpackDevMiddleware(compiler, {
-      publicPath: config.output.publicPath
+      publicPath: `${process.env.PROXY_PATH}/dist`
     })
   )
   router.get('/test', authorization.setAdminCookie, showTestForm)
