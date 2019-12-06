@@ -38,13 +38,14 @@ const apiRouter = Router()
 const router = Router()
 
 if (process.env.NODE_ENV === 'development') {
-  const Bundler = require('parcel-bundler')
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const config = require('./webpack.config.js')
+  const compiler = webpack(config)
 
-  const file = path.resolve(process.cwd(), 'client/index.js')
-  const options = {}
-
-  const bundler = new Bundler(file, options)
-  router.use('/dist', bundler.middleware())
+  router.use('/dist', webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath
+  }))
   router.get('/test', authorization.setAdminCookie, showTestForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
