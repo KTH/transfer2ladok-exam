@@ -49,6 +49,7 @@ if (process.env.NODE_ENV === 'development') {
     })
   )
   router.get('/test', authorization.setAdminCookie, showTestForm)
+  router.post('/test', submitForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
