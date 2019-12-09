@@ -67,6 +67,11 @@ function App ({ courseId }) {
         ))}
       </select>
       <h2>Examination Date</h2>
+      <p>
+        Required field. When exporting to Ladok, all students will have the same
+        Examination Date. If you need to set a different date individually,
+        please change it in Ladok after exporting
+      </p>
       <input
         name='examination_date'
         type='date'
@@ -77,7 +82,9 @@ function App ({ courseId }) {
       <input type='hidden' name='course_id' value={courseId} />
 
       <h2>Click to export</h2>
-      <button type='submit' onClick={event => submitForm(event)}>Export to Ladok</button>
+      <button type='submit' onClick={event => submitForm(event)}>
+        Export to Ladok
+      </button>
 
       <h2>Here you can see the grades of the selected assignment/module</h2>
       {showTable && (
