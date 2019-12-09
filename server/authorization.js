@@ -2,8 +2,11 @@ const log = require('skog')
 const isAllowed = require('../lib/is-allowed')
 const { ClientError } = require('../lib/errors')
 
-module.exports = async function authorization (req, res, next) {
-  const accessData = req.accessData
+async function authorize (req, res, next) {
+  const accessData = req.accessData || req.signedCookies.access_data
+  const courseId = req.query.course_id || req.body.course_id
+
+  req.accessData = accessData
 
   if (!accessData) {
     throw new Error('No access data found')
@@ -26,7 +29,7 @@ module.exports = async function authorization (req, res, next) {
     }
     const allowedIncanvas = await isAllowed.isAllowedInCanvas(
       accessData.token,
-      req.query.course_id
+      courseId
     )
 
     if (!allowedIncanvas) {
@@ -41,4 +44,20 @@ module.exports = async function authorization (req, res, next) {
   }
 
   next()
+}
+
+async function setAdminCookie (req, res, next) {
+  log.fatal('You are setting the admin token in a Cookie!!!!')
+
+  res.cookie(
+    'access_data',
+    { token: process.env.CANVAS_ADMIN_API_TOKEN },
+    { signed: true }
+  )
+  next()
+}
+
+module.exports = {
+  authorize,
+  setAdminCookie
 }
