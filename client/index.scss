@@ -2,6 +2,10 @@
 @import 'kth-style/public/sass/variables/_spacings';
 @import 'kth-style/public/sass/variables/_fonts';
 
+html {
+    font-family: $sansSerif;
+}
+
 body {
     background: $white;
     color: $black;
