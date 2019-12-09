@@ -16,4 +16,14 @@ server.listen(process.env.PORT || 3001, async () => {
     'Server started. Go to http://localhost:%s',
     process.env.PORT || 3001
   )
+
+  if (process.env.NODE_ENV === 'development') {
+    skog.info(
+      'Test endpoint available here: http://localhost:%s%s%s?course_id=%s',
+      process.env.PORT || 3001,
+      process.env.PROXY_PATH || '',
+      '/test',
+      12295
+    )
+  }
 })

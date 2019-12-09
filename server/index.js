@@ -4,15 +4,19 @@ const Router = require('express-promise-router')
 const log = require('skog')
 const path = require('path')
 const bodyParser = require('body-parser')
-const system = require('./middleware/system')
-const { oauth1, oauth2 } = require('./middleware/oauth')('/export3 ')
-const authorization = require('./middleware/authorization')
+const cookieParser = require('cookie-parser')
+const system = require('./system')
+const { oauth1, oauth2 } = require('./oauth')('/export3')
+const authorization = require('./authorization')
 const {
   rootPage,
   startPage,
   showForm,
-  submitForm
-} = require('./middleware/export-to-ladok')
+  showTestForm,
+  submitForm,
+  listCourseData,
+  listGradesData
+} = require('./export-to-ladok')
 const cuid = require('cuid')
 
 const server = express()
@@ -22,6 +26,7 @@ server.set('view engine', 'handlebars')
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: true }))
+server.use(cookieParser(process.env.COOKIE_SIGNATURE_SECRET))
 
 server.use((req, res, next) => {
   log.child({ req_id: cuid() }, next)
@@ -29,20 +34,22 @@ server.use((req, res, next) => {
 
 const PROXY_PATH = process.env.PROXY_PATH || ''
 
-// Define the router as map between routes and a set of middleware
+// Define the router as map between routes and a set of middlewares & handlers
+const apiRouter = Router()
 const router = Router()
 
 if (process.env.NODE_ENV === 'development') {
-  const Bundler = require('parcel-bundler')
+  const webpack = require('webpack')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const config = require('../webpack.config.js')
+  const compiler = webpack(config)
 
-  const file = path.resolve(process.cwd(), 'client/index.js')
-  const scss = path.resolve(process.cwd(), 'client/c2l2.scss')
-  const options = {
-      publicUrl: '/dist'
-  }
-
-  const bundler = new Bundler([file, scss], options)
-  router.use('', bundler.middleware())
+  server.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: `${process.env.PROXY_PATH}/dist`
+    })
+  )
+  router.get('/test', authorization.setAdminCookie, showTestForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
@@ -50,11 +57,16 @@ if (process.env.NODE_ENV === 'development') {
 router.get('/', rootPage)
 router.post('/export', startPage)
 router.post('/export2', oauth1)
-router.get('/export3', oauth2, authorization, showForm)
+router.get('/export3', oauth2, authorization.authorize, showForm)
 router.post('/export3', submitForm)
 
 router.get('/_monitor', system.monitor)
 router.get('/_about', system.about)
+router.use('/api', apiRouter)
+
+apiRouter.use(authorization.authorize)
+apiRouter.get('/course-info', listCourseData)
+apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH + '/static/kth-style', express.static('./node_modules/kth-style/dist'))
 
