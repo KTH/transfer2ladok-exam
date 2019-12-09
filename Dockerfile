@@ -10,7 +10,7 @@ RUN npm run build
 # Stage 1. Build the actual image
 FROM kthse/kth-nodejs:10.14.0
 COPY . .
-#COPY --from=0 /tmp/lms-export-to-ladok-2/static/index.js ./static/index.js
+COPY --from=0 /tmp/lms-export-to-ladok-2/dist ./dist
 RUN npm ci --only=production
 
 EXPOSE 3001
