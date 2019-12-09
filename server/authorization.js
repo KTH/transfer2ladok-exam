@@ -11,7 +11,8 @@ async function authorize (req, res, next) {
   if (!accessData) {
     throw new Error('No access data found')
   }
-
+  
+  // TODO: this should be !== to work!
   if (accessData.realUserId && accessData.userId === accessData.realUserId) {
     throw new ClientError(
       'not_allowed',
