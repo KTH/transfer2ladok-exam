@@ -68,8 +68,6 @@ apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 
-server.use(PROXY_PATH + '/static/kth-style', express.static('./node_modules/kth-style/dist'))
-
 server.use(PROXY_PATH, router)
 server.use(function catchAll (err, req, res, next) {
   log.error({ req, res, err })
