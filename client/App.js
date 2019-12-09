@@ -50,6 +50,8 @@ function App ({ courseId }) {
       <h2>Examination Date</h2>
       <input name='examination_date' type='date' />
 
+      <input type='hidden' name='course_id' value={courseId} />
+
       <h2>Click to export</h2>
       <button type='submit'>Export to Ladok</button>
 
