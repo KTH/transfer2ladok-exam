@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import Table from './Table'
-import { useFetch } from './react-hooks'
+import { useFetch, useValidatedState } from './react-hooks'
+
+function validDate (date) {
+  if (!date || date === '') {
+    throw new Error('Mandatory field')
+  }
+}
 
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
@@ -9,6 +15,10 @@ function App ({ courseId }) {
 
   const [selectedAssignment, setAssignment] = useState(null)
   const [selectedModule, setModule] = useState(null)
+  const [errorDate, examinationDate, setExaminationDate] = useValidatedState(
+    null,
+    validDate
+  )
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
@@ -48,7 +58,12 @@ function App ({ courseId }) {
         ))}
       </select>
       <h2>Examination Date</h2>
-      <input name='examination_date' type='date' />
+      <input
+        name='examination_date'
+        type='date'
+        onChange={event => setExaminationDate(event.target.value)}
+      />
+      {errorDate && <p>{errorDate.message}</p>}
 
       <input type='hidden' name='course_id' value={courseId} />
 
