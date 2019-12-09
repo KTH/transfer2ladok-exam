@@ -87,9 +87,7 @@ const oauth2 = redirectPath =>
     if (req.query.error) {
       throw new ClientError(
         'unknown_oauth_error',
-        `Unexpected query parameter [error=${
-          req.query.error
-        }] received from Canvas`
+        `Unexpected query parameter [error=${req.query.error}] received from Canvas`
       )
     }
 
