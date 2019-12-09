@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Table from './Table'
 import { useFetch, useValidatedState } from './react-hooks'
 
-function validDate (date) {
+function validateDate (date) {
   if (!date || date === '') {
     throw new Error('Mandatory field')
   }
@@ -17,8 +17,17 @@ function App ({ courseId }) {
   const [selectedModule, setModule] = useState(null)
   const [errorDate, examinationDate, setExaminationDate] = useValidatedState(
     null,
-    validDate
+    validateDate
   )
+
+  function submitForm (event) {
+    try {
+      validateDate(examinationDate)
+    } catch (err) {
+      event.preventDefault()
+      setExaminationDate(examinationDate)
+    }
+  }
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
@@ -68,7 +77,7 @@ function App ({ courseId }) {
       <input type='hidden' name='course_id' value={courseId} />
 
       <h2>Click to export</h2>
-      <button type='submit'>Export to Ladok</button>
+      <button type='submit' onClick={event => submitForm(event)}>Export to Ladok</button>
 
       <h2>Here you can see the grades of the selected assignment/module</h2>
       {showTable && (
