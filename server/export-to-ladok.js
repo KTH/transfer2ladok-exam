@@ -8,6 +8,7 @@ const log = require('skog')
 
 async function rootPage (req, res) {
   res.render('root', {
+    prefix_path: process.env.PROXY_PATH,
     layout: false
   })
 }
@@ -18,6 +19,7 @@ async function startPage (req, res) {
   }
 
   res.render('start', {
+    prefix_path: process.env.PROXY_PATH,
     next: `${process.env.PROXY_PATH}/export2`,
     custom_canvas_course_id: req.body.custom_canvas_course_id,
     layout: false
