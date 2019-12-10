@@ -27,12 +27,9 @@ export function useFetch (url) {
       })
   }
 
-  useEffect(
-    () => {
-      fetchData()
-    },
-    [url]
-  )
+  useEffect(() => {
+    fetchData()
+  }, [url])
 
   return { loading, error, data }
 }
