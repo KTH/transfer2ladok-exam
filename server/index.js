@@ -67,6 +67,15 @@ apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH, router)
+server.use(function catchKnownError (err, req, res, next) {
+  log.warn({ req, res, err })
+
+  if (err.name === 'ClientError') {
+    res.render('error', { message: err.message, layout: false })
+  } else {
+    next(err)
+  }
+})
 server.use(function catchAll (err, req, res, next) {
   log.error({ req, res, err })
   res.send('An error ocurred! :(')
