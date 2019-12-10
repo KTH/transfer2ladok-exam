@@ -27,40 +27,12 @@ export function useFetch (url) {
       })
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [url])
+  useEffect(
+    () => {
+      fetchData()
+    },
+    [url]
+  )
 
   return { loading, error, data }
-}
-
-/**
- * Wrapper over "useState" hook. Only will set the new state if
- * `validation(newState)` doesn't throw.
- *
- * Returns the error thrown by "validation", the new state (always one of
- * them is null) and the setState function
- */
-export function useValidatedState (initialState, validation) {
-  const [currentState, setValidatedState] = useState({
-    state: initialState,
-    error: null
-  })
-
-  function setState (newState) {
-    try {
-      validation(newState)
-      setValidatedState({
-        state: newState,
-        error: null
-      })
-    } catch (error) {
-      setValidatedState({
-        error,
-        state: null
-      })
-    }
-  }
-
-  return [currentState.error, currentState.state, setState]
 }

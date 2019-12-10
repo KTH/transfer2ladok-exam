@@ -2,12 +2,6 @@ import React, { useState } from 'react'
 import Table from './Table'
 import { useFetch, useValidatedState } from './react-hooks'
 
-function validateDate (date) {
-  if (!date || date === '') {
-    throw new Error('Mandatory field')
-  }
-}
-
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
     `api/course-info?course_id=${courseId}`
@@ -15,19 +9,6 @@ function App ({ courseId }) {
 
   const [selectedAssignment, setAssignment] = useState(null)
   const [selectedModule, setModule] = useState(null)
-  const [errorDate, examinationDate, setExaminationDate] = useValidatedState(
-    null,
-    validateDate
-  )
-
-  function submitForm (event) {
-    try {
-      validateDate(examinationDate)
-    } catch (err) {
-      event.preventDefault()
-      setExaminationDate(examinationDate)
-    }
-  }
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
@@ -68,23 +49,16 @@ function App ({ courseId }) {
       </select>
       <h2>Examination Date</h2>
       <p>
-        Required field. When exporting to Ladok, all students will have the same
-        Examination Date. If you need to set a different date individually,
+        Required field. When exporting to Ladok, all students will receive the
+        same Examination Date. If you need to set a different date individually,
         please change it in Ladok after exporting
       </p>
-      <input
-        name='examination_date'
-        type='date'
-        onChange={event => setExaminationDate(event.target.value)}
-      />
-      {errorDate && <p>{errorDate.message}</p>}
+      <input name='examination_date' type='date' required />
 
       <input type='hidden' name='course_id' value={courseId} />
 
       <h2>Click to export</h2>
-      <button type='submit' onClick={event => submitForm(event)}>
-        Export to Ladok
-      </button>
+      <button type='submit'>Export to Ladok</button>
 
       <h2>Here you can see the grades of the selected assignment/module</h2>
       {showTable && (
