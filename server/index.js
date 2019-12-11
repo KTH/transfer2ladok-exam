@@ -9,6 +9,7 @@ const system = require('./system')
 const { oauth1, oauth2 } = require('./oauth')('/export3')
 const authorization = require('./authorization')
 const {
+  rootPage,
   startPage,
   showForm,
   showTestForm,
@@ -53,6 +54,8 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
+
+router.get('/', rootPage)
 router.post('/export', startPage)
 router.post('/export2', oauth1)
 router.get('/export3', oauth2, authorization.authorize, showForm)
@@ -67,8 +70,20 @@ apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH, router)
+server.use(function catchKnownError (err, req, res, next) {
+  if (err.name === 'ClientError') {
+    log.warn({ req, res, err })
+    res.render('error', {
+      prefix_path: process.env.PROXY_PATH,
+      message: err.message,
+      layout: false
+    })
+  } else {
+    next(err)
+  }
+})
 server.use(function catchAll (err, req, res, next) {
   log.error({ req, res, err })
-  res.send('An error ocurred! :(')
+  res.send('A fatal error occurred! :(')
 })
 module.exports = server

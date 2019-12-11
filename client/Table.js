@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFetch } from './react-hooks'
 
-function Table ({ course, assignment, module }) {
+function Table({ course, assignment, module }) {
   const { loading, error, data } = useFetch(
     `api/table?course_id=${course}&assignment_id=${assignment}&module_id=${module}`
   )
@@ -20,8 +20,8 @@ function Table ({ course, assignment, module }) {
       <thead>
         <tr>
           <th>Name</th>
-          <th>Canvas grade</th>
-          <th>Ladok grade</th>
+          <th>Canvas result</th>
+          <th>Ladok draft (utkast)</th>
         </tr>
       </thead>
       <tbody>

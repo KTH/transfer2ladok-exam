@@ -1,7 +1,13 @@
+@import 'kth-style/public/sass/kth-bootstrap';
+
 html {
   overflow-y: scroll;
+  font-family: $sansSerif;
 }
 
 body {
-  background: #fff;
+  background: $white;
+  color: $black;
+  margin: 0;
+  padding: $spacing;
 }

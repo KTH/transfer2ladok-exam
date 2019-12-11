@@ -6,12 +6,20 @@ const {
 } = require('../lib')
 const log = require('skog')
 
+async function rootPage (req, res) {
+  res.render('root', {
+    prefix_path: process.env.PROXY_PATH,
+    layout: false
+  })
+}
+
 async function startPage (req, res) {
   if (!req.body || !req.body.custom_canvas_course_id) {
     throw new Error()
   }
 
   res.render('start', {
+    prefix_path: process.env.PROXY_PATH,
     next: `${process.env.PROXY_PATH}/export2`,
     custom_canvas_course_id: req.body.custom_canvas_course_id,
     layout: false
@@ -90,6 +98,7 @@ async function listGradesData (req, res) {
 }
 
 module.exports = {
+  rootPage,
   startPage,
   showForm,
   showTestForm,

@@ -16,6 +16,10 @@ module.exports = {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
+        test: /\.svg$/,
+        loader: 'url-loader'
+      },
+      {
         test: /.s[ac]ss$/,
         use: [
           {
@@ -25,7 +29,25 @@ module.exports = {
             }
           },
           'css-loader',
-          'sass-loader'
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              join: function outerJoin (filename, options) {
+                return function innerJoin (uri, baseOrIteratorOrAbsent) {
+                  if (uri.includes('kth-style')) {
+                    uri = `node_modules/kth-style/public${uri.slice(2)}`
+                  }
+                  return uri
+                }
+              }
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       }
     ]
