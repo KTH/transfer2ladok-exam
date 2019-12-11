@@ -4,7 +4,7 @@ const { ClientError } = require('../lib/errors')
 
 async function authorize (req, res, next) {
   const accessData = req.accessData || req.signedCookies.access_data
-  const courseId = req.query.course_id || req.body.courseId
+  const courseId = req.query.course_id || req.body.course_id
 
   req.accessData = accessData
 
@@ -12,6 +12,7 @@ async function authorize (req, res, next) {
     throw new Error('No access data found')
   }
 
+  // TODO: this should be !== to work!
   if (accessData.realUserId && accessData.userId === accessData.realUserId) {
     throw new ClientError(
       'not_allowed',

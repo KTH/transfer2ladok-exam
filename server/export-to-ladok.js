@@ -58,7 +58,7 @@ async function submitForm (req, res) {
     req.body.canvas_assignment,
     req.body.ladok_module,
     req.body.examination_date,
-    req.body.access_token
+    req.signedCookies.access_data.token
   )
   res.render('feedback', { layout: false })
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Table from './Table'
-import { useFetch } from './react-hooks'
+import { useFetch, useValidatedState } from './react-hooks'
 
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
@@ -48,7 +48,14 @@ function App ({ courseId }) {
         ))}
       </select>
       <h2>Examination Date</h2>
-      <input name='examination_date' type='date' />
+      <p>
+        Required field. When exporting to Ladok, all students will receive the
+        same Examination Date. If you need to set a different date individually,
+        please change it in Ladok after exporting
+      </p>
+      <input name='examination_date' type='date' required />
+
+      <input type='hidden' name='course_id' value={courseId} />
 
       <h2>Click to export</h2>
       <button type='submit'>Export to Ladok</button>
