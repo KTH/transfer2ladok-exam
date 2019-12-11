@@ -51,7 +51,7 @@ function App ({ courseId }) {
       <p>
         Required field. When exporting to Ladok, all students will receive the
         same Examination Date. If you need to set a different date individually,
-        please change it in Ladok after exporting
+        please change it in Ladok after exporting.
       </p>
       <input name='examination_date' type='date' required />
 

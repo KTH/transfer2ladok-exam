@@ -16,6 +16,9 @@ function Table ({ course, assignment, module }) {
 
   return (
     <table border='1'>
+      <caption>
+        Displaying {sortedList.length} out of {sortedList.length} students.
+      </caption>
       <thead>
         <tr>
           <th>Name</th>
