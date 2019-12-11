@@ -9,6 +9,7 @@ const system = require('./system')
 const { oauth1, oauth2 } = require('./oauth')('/export3')
 const authorization = require('./authorization')
 const {
+  rootPage,
   startPage,
   showForm,
   showTestForm,
@@ -53,6 +54,8 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
+
+router.get('/', rootPage)
 router.post('/export', startPage)
 router.post('/export2', oauth1)
 router.get('/export3', oauth2, authorization.authorize, showForm)
