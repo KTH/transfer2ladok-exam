@@ -9,7 +9,7 @@
     "start": "node .",
     "build": "NODE_ENV=production webpack",
     "debug": "NODE_ENV=development node --nolazy --inspect-brk=9229 app.js | bunyan -o short",
-    "dev": "NODE_ENV=development nodemon . | bunyan -o short"
+    "dev": "NODE_ENV=development node . | bunyan -o short"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@kth/canvas-api": "^2.1.0",
+    "@kth/reqvars": "^2.0.1",
     "body-parser": "^1.19.0",
     "bunyan": "^1.8.12",
     "cookie-parser": "^1.4.4",
@@ -28,8 +29,8 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-promise-router": "^3.0.3",
-    "kth-style": "^4.2.8",
     "got": "^9.6.0",
+    "kth-style": "^4.2.8",
     "memoizee": "^0.4.14",
     "mongodb": "^3.3.5",
     "skog": "^1.0.0-alpha.1"
