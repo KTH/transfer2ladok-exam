@@ -15,7 +15,8 @@ const {
   showTestForm,
   submitForm,
   listCourseData,
-  listGradesData
+  listGradesData,
+  handleExportError
 } = require('./export-to-ladok')
 const cuid = require('cuid')
 
@@ -65,6 +66,7 @@ router.get('/_monitor', system.monitor)
 router.get('/_monitor_all', system.monitor)
 router.get('/_about', system.about)
 router.use('/api', apiRouter)
+router.use(handleExportError)
 
 apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
