@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFetch } from './react-hooks'
 
-function Table({ course, assignment, module }) {
+function Table ({ course, assignment, module }) {
   const { loading, error, data } = useFetch(
     `api/table?course_id=${course}&assignment_id=${assignment}&module_id=${module}`
   )
