@@ -12,24 +12,10 @@
 
   <h2>Below you can see what has been updated in Ladok</h2>
   <p>If something is not working as intended or you need more help, contact IT support: <a href="mailto:it-support@kth.se">it-support@kth.se</a></p>
-  <table border='1'>
-    <caption>Results of {{draft.length}} students were updated</caption>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Grade in Ladok Draft (utkast)</th>
-        <th>Changed?</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each draft}}
-      <tr>
-        <td>{{name}}</td>
-        <td>{{ladokGrade}}</td>
-        <td>{{changed}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  <div id="root"></div>
+  <script>
+    window.__DATA__ = JSON.parse('{{{draft}}}')
+  </script>
+  <script src="{{prefix_path}}/dist/feedback.js"></script>
 </body>
 </html>

@@ -65,7 +65,7 @@ async function submitForm (req, res) {
     prefix_path: process.env.PROXY_PATH,
     course_id: req.query.course_id,
     layout: false,
-    draft
+    draft: JSON.stringify(draft)
   })
 }
 
