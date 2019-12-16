@@ -53,14 +53,20 @@ async function submitForm (req, res) {
   log.info(
     `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
   )
-  await sendGradesToLadok(
+  const draft = await sendGradesToLadok(
     req.body.course_id,
     req.body.canvas_assignment,
     req.body.ladok_module,
     req.body.examination_date,
     req.signedCookies.access_data.token
   )
-  res.render('feedback', { layout: false })
+
+  res.render('feedback', {
+    prefix_path: process.env.PROXY_PATH,
+    course_id: req.query.course_id,
+    layout: false,
+    draft
+  })
 }
 
 async function listCourseData (req, res) {
