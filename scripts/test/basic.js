@@ -1,8 +1,8 @@
 /** Try to send grades to Ladok and see what happens */
 require('dotenv').config()
-require('../lib/ladok/api').init()
+require('../../lib/ladok/api').init()
 
-const ladok = require('../lib/ladok')
+const ladok = require('../../lib/ladok')
 
 async function start () {
   // Assume a specific Ladok module, Kurstilfälle, etc.
@@ -18,9 +18,11 @@ async function start () {
   const draft1 = ladok.createDraft(moduleId)
   await draft1.setGrade(gradeableResults1[0], 'P', '2019-12-01')
   await draft1.setGrade(gradeableResults1[6], 'F', '2019-12-01')
-  const result1 = await ladok.sendDraft(draft1)
+  const { updateResponse, createResponse } = await ladok.sendDraft(draft1)
+
+  console.log(updateResponse)
+  console.log(createResponse)
   return
-  console.log(result1.create.Resultat)
 
   // Draft 2
   const gradeableResults2 = await ladok.listGradeableResults(
