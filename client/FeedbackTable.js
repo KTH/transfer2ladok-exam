@@ -5,28 +5,27 @@ function FeedbackTable ({ data }) {
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
 
-  const changed = data.filter(r => r.newGrade)
+  const changed = sortedList.filter(r => r.newGrade)
 
   return (
     <table border='1'>
       <caption>
         <p>
           Grades of {changed.length}/{sortedList.length} students have been
-          updated
+          updated:
         </p>
       </caption>
       <thead>
         <tr>
           <th>Name</th>
-          <th></th>
+          <th>New grade in Ladok draft (utkast)</th>
         </tr>
       </thead>
       <tbody>
-        {sortedList.map((row, i) => (
+        {changed.map((row, i) => (
           <tr key={i}>
             <td>{row.name}</td>
             <td>{row.newGrade}</td>
-            <td>{row.newGrade ? 'Has been updated' : ''}</td>
           </tr>
         ))}
       </tbody>
