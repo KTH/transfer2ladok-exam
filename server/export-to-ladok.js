@@ -69,6 +69,10 @@ async function submitForm (req, res) {
       draft: JSON.stringify(draft)
     })
   } catch (err) {
+    if (err.name === 'ExportError') {
+      throw err
+    }
+
     err.name = 'ExportError'
     log.error(err)
     throw err
@@ -117,6 +121,9 @@ function handleExportError (err, req, res, next) {
 
   res.render('export-error', {
     layout: false,
+    summary:
+      err.code === 'ladok_error' ? 'See the error obtained from Ladok' : '',
+    details: err.message,
     prefix_path: process.env.PROXY_PATH,
     course_id: req.query.course_id
   })
