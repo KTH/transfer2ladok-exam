@@ -31,9 +31,13 @@ function App({ courseId }) {
     nextButton = <input type="button" disabled title="Choose an assignment in Canvas first" className="btn btn-info" value="Show students and results →"></input>
   } else if (!selectedModule) {
     nextButton = <input type="button" disabled title="Choose a module in Ladok first" className="btn btn-info" value="Show students and results →"></input>
+  } else if (!examinationDate) {
+    nextButton = <input type="button" disabled title="Choose an examination date first" className="btn btn-info" value="Show students and results →"></input>
   } else {
     nextButton = <input type="button" className="btn btn-info" onClick={event => setCurrentPage(2)} value="Show students and results →"></input>
   }
+
+  const content0 = <h1 className="alert alert-success">Export cancelled. You can safely leave this page and go wherever you want to.</h1>
 
   const content1 = <div className="form-group">
     <h1>Choose which assignment to Export, to which Ladok module (Step 1 of 2)</h1>
@@ -74,9 +78,10 @@ function App({ courseId }) {
       please change it in Ladok after exporting.
 </p>
     <input
-      name='examination_date'
+      name='examination_date '
       className={examinationDate ? "form-control " : "form-control required_input"}
       type='date'
+      value={examinationDate}
       onChange={event => setExaminationDate(event.target.value)}
       required />
 
@@ -102,7 +107,9 @@ function App({ courseId }) {
     )}
   </div>
 
-  if (currentPage === 1) {
+  if (currentPage === 0) {
+    content = content0
+  } else if (currentPage === 1) {
     content = content1
   } else if (currentPage === 2) {
     content = content2
