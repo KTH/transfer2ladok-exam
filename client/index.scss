@@ -11,3 +11,12 @@ body {
   margin: 0;
   padding: $spacing;
 }
+
+.start_c2l2_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.start_C2L2_button {
+  align-self: end;
+}
