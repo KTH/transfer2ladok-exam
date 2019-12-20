@@ -26,8 +26,6 @@ function App({ courseId }) {
 
   return (
     <div>
-      <h1>Hej25
-      </h1>
       <h2>Canvas assignment</h2>
       <select
         name='canvas_assignment'
