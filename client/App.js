@@ -11,6 +11,7 @@ function App({ courseId }) {
   const [selectedAssignment, setAssignment] = useState(null)
   const [selectedModule, setModule] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [examinationDate, setExaminationDate] = useState(null)
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
@@ -72,7 +73,12 @@ function App({ courseId }) {
       same Examination Date. If you need to set a different date individually,
       please change it in Ladok after exporting.
 </p>
-    <input name='examination_date' className="form-control" type='date' required />
+    <input
+      name='examination_date'
+      className={examinationDate ? "form-control " : "form-control required_input"}
+      type='date'
+      onChange={event => setExaminationDate(event.target.value)}
+      required />
 
     <input type='hidden' name='course_id' value={courseId} />
     <input type="button" className="btn btn-warn" onClick={event => setCurrentPage(0)} value="Cancel"></input>
