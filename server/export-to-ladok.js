@@ -35,20 +35,6 @@ async function showForm (req, res) {
   })
 }
 
-/** Show a test form given a course code in req parameters */
-async function showTestForm (req, res) {
-  if (process.env.NODE_ENV !== 'development') {
-    res.status(404).end()
-    return
-  }
-
-  res.render('form', {
-    prefix_path: process.env.PROXY_PATH,
-    course_id: req.query.course_id,
-    layout: false
-  })
-}
-
 async function submitForm (req, res) {
   try {
     log.info(
@@ -133,7 +119,6 @@ module.exports = {
   rootPage,
   startPage,
   showForm,
-  showTestForm,
   submitForm,
   listCourseData,
   listGradesData,

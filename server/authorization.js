@@ -47,18 +47,6 @@ async function authorize (req, res, next) {
   next()
 }
 
-async function setAdminCookie (req, res, next) {
-  log.fatal('You are setting the admin token in a Cookie!!!!')
-
-  res.cookie(
-    'access_data',
-    { token: process.env.CANVAS_ADMIN_API_TOKEN },
-    { signed: true }
-  )
-  next()
-}
-
 module.exports = {
-  authorize,
-  setAdminCookie
+  authorize
 }

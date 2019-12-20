@@ -12,7 +12,6 @@ const {
   rootPage,
   startPage,
   showForm,
-  showTestForm,
   submitForm,
   listCourseData,
   listGradesData,
@@ -42,7 +41,7 @@ const router = Router()
 if (process.env.NODE_ENV === 'development') {
   const webpack = require('webpack')
   const webpackDevMiddleware = require('webpack-dev-middleware')
-  const config = require('../webpack.config.js')
+  const config = require('../webpack.dev.config.js')
   const compiler = webpack(config)
 
   server.use(
@@ -50,8 +49,8 @@ if (process.env.NODE_ENV === 'development') {
       publicPath: `${process.env.PROXY_PATH}/dist`
     })
   )
-  router.get('/test', authorization.setAdminCookie, showTestForm)
-  router.post('/test', submitForm)
+
+  server.use(require('webpack-hot-middleware')(compiler))
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }

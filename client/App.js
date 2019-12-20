@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root'
 import React, { useState } from 'react'
 import Table from './Table'
 import { useFetch, useValidatedState } from './react-hooks'
@@ -72,4 +73,4 @@ function App ({ courseId }) {
   )
 }
 
-export default App
+export default hot(App)
