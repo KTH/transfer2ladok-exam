@@ -6,14 +6,14 @@ const {
 } = require('../lib')
 const log = require('skog')
 
-async function rootPage (req, res) {
+async function rootPage(req, res) {
   res.render('root', {
     prefix_path: process.env.PROXY_PATH,
     layout: false
   })
 }
 
-async function startPage (req, res) {
+async function startPage(req, res) {
   if (!req.body || !req.body.custom_canvas_course_id) {
     throw new Error()
   }
@@ -26,7 +26,7 @@ async function startPage (req, res) {
   })
 }
 
-async function showForm (req, res) {
+async function showForm(req, res) {
   res.render('form', {
     prefix_path: process.env.PROXY_PATH,
     token: req.accessData.token,
@@ -35,21 +35,7 @@ async function showForm (req, res) {
   })
 }
 
-/** Show a test form given a course code in req parameters */
-async function showTestForm (req, res) {
-  if (process.env.NODE_ENV !== 'development') {
-    res.status(404).end()
-    return
-  }
-
-  res.render('form', {
-    prefix_path: process.env.PROXY_PATH,
-    course_id: req.query.course_id,
-    layout: false
-  })
-}
-
-async function submitForm (req, res) {
+async function submitForm(req, res) {
   try {
     log.info(
       `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
@@ -79,7 +65,7 @@ async function submitForm (req, res) {
   }
 }
 
-async function listCourseData (req, res) {
+async function listCourseData(req, res) {
   const courseId = req.query.course_id
 
   log.info(`Fetching data (assignments and modules) of course ${courseId}`)
@@ -103,7 +89,7 @@ async function listCourseData (req, res) {
   })
 }
 
-async function listGradesData (req, res) {
+async function listGradesData(req, res) {
   const data = await getGrades(
     req.query.course_id,
     req.query.assignment_id,
@@ -113,7 +99,7 @@ async function listGradesData (req, res) {
   res.send(data)
 }
 
-function handleExportError (err, req, res, next) {
+function handleExportError(err, req, res, next) {
   if (err.name !== 'ExportError') {
     next(err)
     return
@@ -133,7 +119,6 @@ module.exports = {
   rootPage,
   startPage,
   showForm,
-  showTestForm,
   submitForm,
   listCourseData,
   listGradesData,

@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React, { useState } from 'react'
 import Table from './Table'
 import { useFetch, useValidatedState } from './react-hooks'
@@ -25,7 +26,8 @@ function App({ courseId }) {
 
   return (
     <div>
-      <h1>Hej</h1>
+      <h1>Hej25
+      </h1>
       <h2>Canvas assignment</h2>
       <select
         name='canvas_assignment'
@@ -73,4 +75,5 @@ function App({ courseId }) {
   )
 }
 
-export default App
+export default hot(App)
+// export default App
