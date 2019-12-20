@@ -88,10 +88,13 @@ function App({ courseId }) {
       value={examinationDate}
       onChange={event => setExaminationDate(event.target.value)}
       required />
-
     <input type='hidden' name='course_id' value={courseId} />
-    <input type="button" className="btn btn-warn" onClick={event => setCurrentPage(0)} value="Cancel"></input>
-    {nextButton}
+    <div className="form-footer">
+
+      <input type="button" className="btn btn-warn form-footer-btn" onClick={event => setCurrentPage(0)} value="Cancel"></input>
+      {nextButton}
+    </div>
+
 
   </div>
 

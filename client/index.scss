@@ -24,3 +24,12 @@ body {
 .required_input {
   border: 3px solid red;
 }
+
+.form-footer-btn {
+
+}
+.form-footer{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2em;
+}
