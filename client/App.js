@@ -45,7 +45,7 @@ function App({ courseId }) {
     <p>Note that only letter grades will be sent to Ladok</p>
     <select
       className={selectedAssignment ? "form-control " : "form-control required_input"}
-      value=""
+      value={selectedAssignment || ''}
       name='canvas_assignment'
       onChange={event => setAssignment(event.target.value)}
     >
@@ -61,7 +61,7 @@ function App({ courseId }) {
     <select
       className={selectedModule ? "form-control " : "form-control required_input"}
       name='ladok_module'
-      value=""
+      value={selectedModule || ''}
       onChange={event => setModule(event.target.value)}
     >
       <option value="" disabled hidden>Choose Ladok module</option>
