@@ -1,13 +1,14 @@
 const webpackProd = require('./webpack.config')
 const webpack = require('webpack')
 
+
 module.exports = {
     ...webpackProd,
     mode: 'development',
     devtool: 'eval-source-map',
     entry: {
-        index: ['webpack-hot-middleware/client', './index.scss', './index.js'],
-        feedback: ['./feedback.js']
+        index: ['webpack-hot-middleware/client', ...webpackProd.entry.index],
+        ...webpackProd.entry
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
