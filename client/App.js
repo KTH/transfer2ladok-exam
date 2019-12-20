@@ -26,6 +26,7 @@ function App({ courseId }) {
 
   return (
     <div>
+      <h1>Choose which assignment to Export, to which Ladok module (Step 1 of 2)</h1>
       <h2>Canvas assignment</h2>
       <select
         name='canvas_assignment'
