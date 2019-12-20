@@ -5,10 +5,11 @@ module.exports = {
   mode: process.env.NODE_ENV || 'production',
   context: path.resolve(__dirname, 'client'),
   entry: {
-    index: ['./index.scss', './index.js']
+    index: ['./index.scss', './index.js'],
+    feedback: ['./feedback.js']
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: `${process.env.PROXY_PATH}/dist/`
   },
