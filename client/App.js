@@ -16,10 +16,10 @@ function App({ courseId }) {
   if (error) return <div>Error</div>
 
   const allAssignments = [
-    { id: 0, name: 'Choose an assignment in Canvas' }
+
   ].concat(data.canvasAssignments)
 
-  const allModules = [{ id: 0, name: 'Choose a module in Ladok' }].concat(
+  const allModules = [].concat(
     data.ladokModules
   )
 
@@ -40,10 +40,13 @@ function App({ courseId }) {
     <h2>Canvas assignment:</h2>
     <p>Note that only letter grades will be sent to Ladok</p>
     <select
+      required="true"
+      placeholder="text"
       className="form-control "
       name='canvas_assignment'
       onChange={event => setAssignment(event.target.value)}
     >
+      <option value="" disabled selected hidden>Choose assignment</option>
       {allAssignments.map(assignment => (
         <option key={assignment.id} value={assignment.id}>
           {assignment.name}
@@ -57,6 +60,7 @@ function App({ courseId }) {
       name='ladok_module'
       onChange={event => setModule(event.target.value)}
     >
+      <option value="" disabled selected hidden>Choose Ladok module</option>
       {allModules.map(ladokModule => (
         <option key={ladokModule.id} value={ladokModule.id}>
           {ladokModule.name} - {ladokModule.title}
@@ -107,4 +111,4 @@ function App({ courseId }) {
 }
 
 export default hot(App)
-// export default App
+
