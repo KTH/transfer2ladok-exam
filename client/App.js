@@ -98,11 +98,16 @@ function App({ courseId }) {
 
   </div>
 
+  const tableFooter = <div className="form-footer">
+    <button type='button' className="btn btn-info" onClick={event => setCurrentPage(1)} >← Choose assignment, module and examination date</button>
+    <button type='button' className="btn btn-default" onClick={event => setCurrentPage(0)} >Cancel</button>
+    <button type='submit' className="btn btn-success">Export to Ladok</button>
+  </div>
   const content2 = <div className="form-group">
     <input type='hidden' name='course_id' value={courseId} />
 
-    <h2>Click to export</h2>
-    <button type='submit'>Export to Ladok</button>
+
+    {tableFooter}
 
     <h2>Here you can see the grades of the selected assignment/module</h2>
     {showTable && (
@@ -112,6 +117,7 @@ function App({ courseId }) {
         module={selectedModule}
       />
     )}
+
   </div>
 
   if (currentPage === 0) {
