@@ -26,7 +26,6 @@ function App({ courseId }) {
   const showTable = selectedAssignment && selectedModule
 
   let nextButton
-  console.log(selectedModule, selectedAssignment)
   if (!selectedAssignment) {
     nextButton = <input type="button" disabled title="Choose an assignment in Canvas first" className="btn btn-info" value="Show students and results →"></input>
   } else if (!selectedModule) {
@@ -40,13 +39,13 @@ function App({ courseId }) {
     <h2>Canvas assignment:</h2>
     <p>Note that only letter grades will be sent to Ladok</p>
     <select
-      required="true"
-      placeholder="text"
+      className={selectedAssignment ? "" : "required_input"}
+      value=""
       className="form-control "
       name='canvas_assignment'
       onChange={event => setAssignment(event.target.value)}
     >
-      <option value="" disabled selected hidden>Choose assignment</option>
+      <option value="" disabled hidden>Choose assignment</option>
       {allAssignments.map(assignment => (
         <option key={assignment.id} value={assignment.id}>
           {assignment.name}
@@ -58,9 +57,10 @@ function App({ courseId }) {
     <select
       className="form-control"
       name='ladok_module'
+      value=""
       onChange={event => setModule(event.target.value)}
     >
-      <option value="" disabled selected hidden>Choose Ladok module</option>
+      <option value="" disabled hidden>Choose Ladok module</option>
       {allModules.map(ladokModule => (
         <option key={ladokModule.id} value={ladokModule.id}>
           {ladokModule.name} - {ladokModule.title}
