@@ -12,7 +12,6 @@ const {
   rootPage,
   startPage,
   showForm,
-  showTestForm,
   submitForm,
   listCourseData,
   listGradesData,
@@ -50,8 +49,6 @@ if (process.env.NODE_ENV === 'development') {
       publicPath: `${process.env.PROXY_PATH}/dist`
     })
   )
-  router.get('/test', authorization.setAdminCookie, showTestForm)
-  router.post('/test', submitForm)
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
@@ -73,7 +70,7 @@ apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH, router)
-server.use(function catchKnownError (err, req, res, next) {
+server.use(function catchKnownError(err, req, res, next) {
   if (err.name === 'ClientError') {
     log.warn({ req, res, err })
     res.render('error', {
@@ -85,7 +82,7 @@ server.use(function catchKnownError (err, req, res, next) {
     next(err)
   }
 })
-server.use(function catchAll (err, req, res, next) {
+server.use(function catchAll(err, req, res, next) {
   log.error({ req, res, err })
   res.send('A fatal error occurred! :(')
 })
