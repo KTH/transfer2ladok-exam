@@ -26,16 +26,20 @@ function App({ courseId }) {
 
   const showTable = selectedAssignment && selectedModule
 
-  let nextButton
+  let disabled = false
+  let title = ''
   if (!selectedAssignment) {
-    nextButton = <input type="button" disabled title="Choose an assignment in Canvas first" className="btn btn-info" value="Show students and results →"></input>
+    disabled = true
+    title = 'Choose an assignment in Canvas first'
   } else if (!selectedModule) {
-    nextButton = <input type="button" disabled title="Choose a module in Ladok first" className="btn btn-info" value="Show students and results →"></input>
+    disabled = true
+    title = 'Choose a module in Ladok first'
   } else if (!examinationDate) {
-    nextButton = <input type="button" disabled title="Choose an examination date first" className="btn btn-info" value="Show students and results →"></input>
-  } else {
-    nextButton = <input type="button" className="btn btn-info" onClick={event => setCurrentPage(2)} value="Show students and results →"></input>
+    disabled = true
+    title = 'Choose an examination date first'
   }
+
+  const nextButton = <input type="button" className="btn btn-info" disabled={disabled} title={title} onClick={event => setCurrentPage(2)} value="Show students and results →"></input>
 
   const content0 = <h1 className="alert alert-success">Export cancelled. You can safely leave this page and go wherever you want to.</h1>
 
