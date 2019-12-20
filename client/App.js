@@ -39,9 +39,8 @@ function App({ courseId }) {
     <h2>Canvas assignment:</h2>
     <p>Note that only letter grades will be sent to Ladok</p>
     <select
-      className={selectedAssignment ? "" : "required_input"}
+      className={selectedAssignment ? "form-control " : "form-control required_input"}
       value=""
-      className="form-control "
       name='canvas_assignment'
       onChange={event => setAssignment(event.target.value)}
     >
@@ -55,7 +54,7 @@ function App({ courseId }) {
     <h2>Ladok Module</h2>
     <p>To which Ladok module do you want the results to be exported?</p>
     <select
-      className="form-control"
+      className={selectedModule ? "form-control " : "form-control required_input"}
       name='ladok_module'
       value=""
       onChange={event => setModule(event.target.value)}
