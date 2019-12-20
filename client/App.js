@@ -111,11 +111,15 @@ function App({ courseId }) {
 
     <h2>Here you can see the grades of the selected assignment/module</h2>
     {showTable && (
-      <Table
-        course={courseId}
-        assignment={selectedAssignment}
-        module={selectedModule}
-      />
+      <div>
+        <Table
+          course={courseId}
+          assignment={selectedAssignment}
+          module={selectedModule}
+        />
+        {tableFooter}
+      </div>
+
     )}
 
   </div>
