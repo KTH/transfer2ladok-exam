@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'development') {
     })
   )
 
-  server.use(require("webpack-hot-middleware")(compiler))
+  server.use(require('webpack-hot-middleware')(compiler))
 } else {
   router.use('/dist', express.static(path.resolve(process.cwd(), 'dist')))
 }
@@ -72,7 +72,7 @@ apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 
 server.use(PROXY_PATH, router)
-server.use(function catchKnownError(err, req, res, next) {
+server.use(function catchKnownError (err, req, res, next) {
   if (err.name === 'ClientError') {
     log.warn({ req, res, err })
     res.render('error', {
@@ -84,7 +84,7 @@ server.use(function catchKnownError(err, req, res, next) {
     next(err)
   }
 })
-server.use(function catchAll(err, req, res, next) {
+server.use(function catchAll (err, req, res, next) {
   log.error({ req, res, err })
   res.send('A fatal error occurred! :(')
 })

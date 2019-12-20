@@ -2,7 +2,7 @@ const log = require('skog')
 const isAllowed = require('../lib/is-allowed')
 const { ClientError } = require('../lib/errors')
 
-async function authorize(req, res, next) {
+async function authorize (req, res, next) {
   const accessData = req.accessData || req.signedCookies.access_data
   const courseId = req.query.course_id || req.body.course_id
 
@@ -46,7 +46,6 @@ async function authorize(req, res, next) {
 
   next()
 }
-
 
 module.exports = {
   authorize

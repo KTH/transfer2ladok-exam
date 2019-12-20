@@ -1,9 +1,9 @@
-import { hot } from 'react-hot-loader/root';
+import { hot } from 'react-hot-loader/root'
 import React, { useState } from 'react'
 import Table from './Table'
 import { useFetch, useValidatedState } from './react-hooks'
 
-function App({ courseId }) {
+function App ({ courseId }) {
   const { loading, error, data } = useFetch(
     `api/course-info?course_id=${courseId}`
   )
