@@ -74,4 +74,3 @@ function App ({ courseId }) {
 }
 
 export default hot(App)
-// export default App
