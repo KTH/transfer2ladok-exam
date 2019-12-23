@@ -24,7 +24,7 @@ function App ({ courseId }) {
 
   let disabled = false
   let title = ''
-  let buttonClassNames = 'btn btn-success'
+  let buttonClassNames = 'btn btn-success grid-col-3'
   if (!selectedAssignment) {
     disabled = true
     title = 'Choose an assignment in Canvas first'
@@ -46,7 +46,7 @@ function App ({ courseId }) {
       title={title}
       onClick={event => setCurrentPage(2)}
     >
-      Show students and results →
+      Students →
     </button>
   )
 
@@ -62,7 +62,7 @@ function App ({ courseId }) {
       <h1>
         Choose which assignment to Export, to which Ladok module (Step 1 of 2)
       </h1>
-      <h2>Canvas assignment:</h2>
+      <h2>Canvas assignment</h2>
       <p>Note that only letter grades will be sent to Ladok</p>
       <div className='select-wrapper'>
         <select
@@ -115,9 +115,9 @@ function App ({ courseId }) {
         required
       />
       <input type='hidden' name='course_id' value={courseId} />
-      <div className='form-footer'>
+      <div className='button-section'>
         <button
-          className='btn btn-secondary'
+          className='btn btn-secondary grid-col-2'
           onClick={event => setCurrentPage(0)}
         >
           Cancel
@@ -128,22 +128,22 @@ function App ({ courseId }) {
   )
 
   const tableFooter = (
-    <div className='form-footer'>
+    <div className='button-section'>
       <button
         type='button'
-        className='btn btn-info'
+        className='btn btn-secondary grid-col-1'
         onClick={event => setCurrentPage(1)}
       >
-        ← Choose assignment, module and examination date
+        ← Assignments
       </button>
       <button
         type='button'
-        className='btn btn-default'
+        className='btn btn-secondary grid-col-2'
         onClick={event => setCurrentPage(0)}
       >
         Cancel
       </button>
-      <button type='submit' className='btn btn-success'>
+      <button type='submit' className='btn btn-success grid-col-3'>
         Export to Ladok
       </button>
     </div>
