@@ -36,7 +36,7 @@ async function authorize (req, res, next) {
     if (!allowedIncanvas) {
       throw new ClientError(
         'not_allowed',
-        'Only teachers etcetera can use this app.'
+        'Only teachers and examiners are allowed to use this app.'
       )
     }
   } catch (err) {

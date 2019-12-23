@@ -11,7 +11,7 @@ function App ({ courseId }) {
   const [selectedAssignment, setAssignment] = useState(null)
   const [selectedModule, setModule] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
-  const [examinationDate, setExaminationDate] = useState(null)
+  const [examinationDate, setExaminationDate] = useState('')
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error</div>
