@@ -21,14 +21,10 @@ body {
   align-self: end;
 }
 
-.required_input {
-  border: 3px solid red;
-}
-
-.form-footer-btn {
-}
 .form-footer {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
   padding-top: 2em;
 }
