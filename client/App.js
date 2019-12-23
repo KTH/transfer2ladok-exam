@@ -13,7 +13,7 @@ function App ({ courseId }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [examinationDate, setExaminationDate] = useState('')
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div className='loader'>Loading...</div>
   if (error) return <div>Error</div>
 
   const allAssignments = [].concat(data.canvasAssignments)
@@ -151,9 +151,6 @@ function App ({ courseId }) {
   const content2 = (
     <div className='form-group'>
       <input type='hidden' name='course_id' value={courseId} />
-
-      {tableFooter}
-
       <h2>Here you can see the grades of the selected assignment/module</h2>
       {showTable && (
         <div>
@@ -168,6 +165,7 @@ function App ({ courseId }) {
     </div>
   )
 
+  let content = ''
   if (currentPage === 0) {
     content = content0
   } else if (currentPage === 1) {

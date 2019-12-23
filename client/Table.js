@@ -6,7 +6,7 @@ function Table ({ course, assignment, module }) {
     `api/table?course_id=${course}&assignment_id=${assignment}&module_id=${module}`
   )
 
-  if (loading) return <div>Loading</div>
+  if (loading) return <div className='loader'>Loading...</div>
 
   if (error) return <div>error</div>
 
