@@ -1,4 +1,5 @@
 config/version.js
+*.handlebars
 
 # From here, ensure that everything is a copy from .gitignore
 # -----------------------------------------------------------
