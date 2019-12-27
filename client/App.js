@@ -27,15 +27,15 @@ function App ({ courseId }) {
   let buttonClassNames = 'btn btn-success grid-col-3'
   if (!selectedAssignment) {
     disabled = true
-    title = 'Choose an assignment in Canvas first'
+    title = 'Select an assignment in Canvas first'
     buttonClassNames = buttonClassNames.concat(' ', 'disabled')
   } else if (!selectedModule) {
     disabled = true
-    title = 'Choose a module in Ladok first'
+    title = 'Select a module in Ladok first'
     buttonClassNames = buttonClassNames.concat(' ', 'disabled')
   } else if (!examinationDate) {
     disabled = true
-    title = 'Choose an examination date first'
+    title = 'Select an examination date first'
     buttonClassNames = buttonClassNames.concat(' ', 'disabled')
   }
 
@@ -59,20 +59,23 @@ function App ({ courseId }) {
 
   const content1 = (
     <div className='form-group'>
-      <h1>
-        Choose which assignment to Export, to which Ladok module (Step 1 of 2)
-      </h1>
+      <h1>Select assignment and date (Step 1 of 2)</h1>
       <h2>Canvas assignment</h2>
       <p>Note that only letter grades will be sent to Ladok</p>
       <div className='select-wrapper'>
         <select
           className='custom-select'
-          value={selectedAssignment || ''}
+          value={(selectedAssignment && selectedAssignment.id) || ''}
           name='canvas_assignment'
-          onChange={event => setAssignment(event.target.value)}
+          onChange={event =>
+            setAssignment({
+              id: event.target.value,
+              name: event.target.selectedOptions[0].text
+            })
+          }
         >
           <option value='' disabled hidden>
-            Choose assignment
+            Select assignment
           </option>
           {allAssignments.map(assignment => (
             <option key={assignment.id} value={assignment.id}>
@@ -87,11 +90,16 @@ function App ({ courseId }) {
         <select
           className='custom-select'
           name='ladok_module'
-          value={selectedModule || ''}
-          onChange={event => setModule(event.target.value)}
+          value={(selectedModule && selectedModule.id) || ''}
+          onChange={event =>
+            setModule({
+              id: event.target.value,
+              name: event.target.selectedOptions[0].text
+            })
+          }
         >
           <option value='' disabled hidden>
-            Choose Ladok module
+            Select Ladok module
           </option>
           {allModules.map(ladokModule => (
             <option key={ladokModule.id} value={ladokModule.id}>
@@ -151,13 +159,22 @@ function App ({ courseId }) {
   const content2 = (
     <div className='form-group'>
       <input type='hidden' name='course_id' value={courseId} />
-      <h2>Here you can see the grades of the selected assignment/module</h2>
+      <h2>Export students with results (Step 2 of 2)</h2>
+      <div className='alert alert-info' aria-live='polite' role='alert'>
+        <p>
+          Note that the results of students are based on data fetched from
+          Canvas Gradebook during launch of this application. If you have
+          entered a result very recently and it is missing, you might have to
+          relaunch the application.
+        </p>
+      </div>
       {showTable && (
         <div>
           <Table
             course={courseId}
             assignment={selectedAssignment}
             module={selectedModule}
+            date={examinationDate}
           />
           {tableFooter}
         </div>

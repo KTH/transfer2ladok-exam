@@ -1,9 +1,9 @@
 import React from 'react'
 import { useFetch } from './react-hooks'
 
-function Table ({ course, assignment, module }) {
+function Table ({ course, assignment, module, date }) {
   const { loading, error, data } = useFetch(
-    `api/table?course_id=${course}&assignment_id=${assignment}&module_id=${module}`
+    `api/table?course_id=${course}&assignment_id=${assignment.id}&module_id=${module.id}`
   )
 
   if (loading) return <div className='loader'>Loading...</div>
@@ -15,25 +15,31 @@ function Table ({ course, assignment, module }) {
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
 
   return (
-    <table border='1'>
-      <caption>Displaying {sortedList.length} students</caption>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Canvas result</th>
-          <th>Ladok draft (utkast)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedList.map((row, i) => (
-          <tr key={i}>
-            <td>{row.name}</td>
-            <td>{row.canvasGrade}</td>
-            <td>{row.ladokGrade}</td>
+    <>
+      <p>
+        <span className='font-weight-bold'>Selected examination date:</span>{' '}
+        {date}
+      </p>
+      <table border='1'>
+        <caption>Number of students: {sortedList.length}</caption>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Canvas: {assignment.name}</th>
+            <th>Ladok: {module.name}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sortedList.map((row, i) => (
+            <tr key={i}>
+              <td>{row.name}</td>
+              <td>{row.canvasGrade}</td>
+              <td>{row.ladokGrade}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   )
 }
 
