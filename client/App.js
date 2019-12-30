@@ -41,53 +41,8 @@ function App ({ courseId }) {
     buttonClassNames = buttonClassNames.concat(' ', 'disabled')
   }
 
-  const nextButton = (
-    <button
-      className={buttonClassNames}
-      disabled={disabled}
-      title={title}
-      onClick={event => setCurrentPage(2)}
-    >
-      Students →
-    </button>
-  )
-
-  const tableFooter = (
-    <div className='button-section'>
-      <button
-        type='button'
-        className='btn btn-secondary grid-col-1'
-        onClick={event => setCurrentPage(1)}
-      >
-        ← Assignments
-      </button>
-      <button
-        type='button'
-        className='btn btn-secondary grid-col-2'
-        onClick={event => setCurrentPage(0)}
-      >
-        Cancel
-      </button>
-      <ButtonModal
-        id='export'
-        type='submit'
-        btnLabel='Export to Ladok'
-        handleParentConfirm={() => {
-          setCurrentPage(3)
-        }}
-        modalLabels={{
-          header: 'Confirm export',
-          body: `<br>Canvas assignment: <strong>${selectedAssignment.name}</strong><br>Ladok module: <strong>${selectedModule.name}</strong><br>Date: <strong>${examinationDate}</strong><br><br>Do you want to proceed?`,
-          btnCancel: 'No, go back',
-          btnConfirm: 'Yes, export'
-        }}
-        className='grid-col-3'
-        disabled={false}
-      />
-    </div>
-  )
-
   let content = ''
+  //TODO: This is an odd duck...
   if (currentPage === 0) {
     content = (
       <h1 className='alert alert-success'>
@@ -96,6 +51,17 @@ function App ({ courseId }) {
       </h1>
     )
   } else if (currentPage === 1) {
+    const nextButton = (
+      <button
+        className={buttonClassNames}
+        disabled={disabled}
+        title={title}
+        onClick={event => setCurrentPage(2)}
+      >
+        Students →
+      </button>
+    )
+
     content = (
       <div className='form-group'>
         <h1>Select assignment and date (Step 1 of 2)</h1>
@@ -173,6 +139,41 @@ function App ({ courseId }) {
       </div>
     )
   } else if (currentPage === 2) {
+    const tableFooter = (
+      <div className='button-section'>
+        <button
+          type='button'
+          className='btn btn-secondary grid-col-1'
+          onClick={event => setCurrentPage(1)}
+        >
+          ← Assignments
+        </button>
+        <button
+          type='button'
+          className='btn btn-secondary grid-col-2'
+          onClick={event => setCurrentPage(0)}
+        >
+          Cancel
+        </button>
+        <ButtonModal
+          id='export'
+          type='submit'
+          btnLabel='Export to Ladok'
+          handleParentConfirm={() => {
+            setCurrentPage(3)
+          }}
+          modalLabels={{
+            header: 'Confirm export',
+            body: `<br>Canvas assignment: <strong>${selectedAssignment.name}</strong><br>Ladok module: <strong>${selectedModule.name}</strong><br>Date: <strong>${examinationDate}</strong><br><br>Do you want to proceed?`,
+            btnCancel: 'No, go back',
+            btnConfirm: 'Yes, export'
+          }}
+          className='grid-col-3'
+          disabled={false}
+        />
+      </div>
+    )
+
     content = (
       <div className='form-group'>
         <h2>Export students with results (Step 2 of 2)</h2>
@@ -204,7 +205,19 @@ function App ({ courseId }) {
       ladok_module: selectedModule.id,
       examination_date: examinationDate
     }
-    content = <WizardResult body={body} />
+    content = (
+      <>
+        <WizardResult body={body} />
+        <div className='button-section'>
+          <button
+            className='btn btn-success grid-col-3'
+            onClick={event => setCurrentPage(1)}
+          >
+            Done
+          </button>
+        </div>
+      </>
+    )
   }
 
   return <div>{content}</div>

@@ -12,7 +12,7 @@ const {
   rootPage,
   startPage,
   showForm,
-  submitForm,
+  submitGrades,
   listCourseData,
   listGradesData,
   handleExportError
@@ -69,7 +69,7 @@ router.use(handleExportError)
 apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
-apiRouter.post('/submitData', submitForm)
+apiRouter.post('/submitGrades', submitGrades)
 
 server.use(PROXY_PATH, router)
 server.use(function catchKnownError (err, req, res, next) {

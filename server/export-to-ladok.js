@@ -35,12 +35,12 @@ async function showForm (req, res) {
   })
 }
 
-async function submitForm (req, res) {
+async function submitGrades (req, res) {
   try {
     log.info(
       `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
     )
-    const draft = await sendGradesToLadok(
+    const result = await sendGradesToLadok(
       req.body.course_id,
       req.body.canvas_assignment,
       req.body.ladok_module,
@@ -48,7 +48,7 @@ async function submitForm (req, res) {
       req.signedCookies.access_data.token
     )
 
-    res.send(draft)
+    res.send(result)
   } catch (err) {
     if (err.name === 'ExportError') {
       throw err
@@ -114,7 +114,7 @@ module.exports = {
   rootPage,
   startPage,
   showForm,
-  submitForm,
+  submitGrades,
   listCourseData,
   listGradesData,
   handleExportError
