@@ -1,7 +1,9 @@
 import { hot } from 'react-hot-loader/root'
 import React, { useState } from 'react'
 import Table from './Table'
-import { useFetch, useValidatedState } from './react-hooks'
+import WizardResult from './WizardResult'
+import { useFetch } from './react-hooks'
+import { ButtonModal } from '@kth/kth-style-react-components'
 
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
@@ -66,9 +68,22 @@ function App ({ courseId }) {
       >
         Cancel
       </button>
-      <button type='submit' className='btn btn-success grid-col-3'>
-        Export to Ladok
-      </button>
+      <ButtonModal
+        id='export'
+        type='submit'
+        btnLabel='Export to Ladok'
+        handleParentConfirm={() => {
+          setCurrentPage(3)
+        }}
+        modalLabels={{
+          header: 'Confirm export',
+          body: `<br>Canvas assignment: <strong>${selectedAssignment.name}</strong><br>Ladok module: <strong>${selectedModule.name}</strong><br>Date: <strong>${examinationDate}</strong><br><br>Do you want to proceed?`,
+          btnCancel: 'No, go back',
+          btnConfirm: 'Yes, export'
+        }}
+        className='grid-col-3'
+        disabled={false}
+      />
     </div>
   )
 
@@ -146,7 +161,6 @@ function App ({ courseId }) {
           onChange={event => setExaminationDate(event.target.value)}
           required
         />
-        <input type='hidden' name='course_id' value={courseId} />
         <div className='button-section'>
           <button
             className='btn btn-secondary grid-col-2'
@@ -161,14 +175,6 @@ function App ({ courseId }) {
   } else if (currentPage === 2) {
     content = (
       <div className='form-group'>
-        <input type='hidden' name='course_id' value={courseId} />
-        <input
-          type='hidden'
-          name='canvas_assignment'
-          value={selectedAssignment.id}
-        />
-        <input type='hidden' name='ladok_module' value={selectedModule.id} />
-        <input type='hidden' name='examination_date' value={examinationDate} />
         <h2>Export students with results (Step 2 of 2)</h2>
         <div className='alert alert-info' aria-live='polite' role='alert'>
           <p>
@@ -191,6 +197,14 @@ function App ({ courseId }) {
         )}
       </div>
     )
+  } else if (currentPage === 3) {
+    const body = {
+      course_id: courseId,
+      canvas_assignment: selectedAssignment.id,
+      ladok_module: selectedModule.id,
+      examination_date: examinationDate
+    }
+    content = <WizardResult body={body} />
   }
 
   return <div>{content}</div>

@@ -2,6 +2,12 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    module: 'empty'
+  },
   mode: process.env.NODE_ENV || 'production',
   context: path.resolve(__dirname, 'client'),
   entry: {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useFetch (url) {
+export function useFetch (url, method, body) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [data, setData] = useState(null)
@@ -8,8 +8,16 @@ export function useFetch (url) {
   async function fetchData () {
     setLoading(true)
 
+    const options = { method: method || 'GET' }
+    if (body) {
+      options.body = JSON.stringify(body)
+      options.headers = {
+        'Content-Type': 'application/json'
+      }
+    }
+
     window
-      .fetch(url)
+      .fetch(url, options)
       .then(r => {
         if (!r.ok) {
           throw new Error(r.statusText)
