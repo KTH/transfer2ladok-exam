@@ -1,16 +1,26 @@
 import React from 'react'
 import { useFetch } from './react-hooks'
 
-function WizardResult ({ body }) {
+function WizardResult ({ body, setCurrentPage }) {
   const { loading, error, data } = useFetch(`api/submitGrades`, 'POST', body)
 
   if (loading) return <div className='loader'>Loading...</div>
 
   if (error) {
     return (
-      <div className='alert alert-danger' aria-live='polite' role='alert'>
-        <p>The export experienced an error.</p>
-      </div>
+      <>
+        <div className='alert alert-danger' aria-live='polite' role='alert'>
+          <p>The export experienced an error.</p>
+        </div>
+        <div className='button-section'>
+          <button
+            className='btn btn-success grid-col-3'
+            onClick={event => setCurrentPage(1)}
+          >
+            Done
+          </button>
+        </div>
+      </>
     )
   }
 
@@ -29,6 +39,14 @@ function WizardResult ({ body }) {
         to the relevant module in Ladok. Note that you might have to click the
         link twice if you are prompted to log in to Ladok the first time.
       </p>
+      <div className='button-section'>
+        <button
+          className='btn btn-success grid-col-3'
+          onClick={event => setCurrentPage(1)}
+        >
+          Done
+        </button>
+      </div>
     </>
   )
 }
