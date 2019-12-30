@@ -56,13 +56,15 @@ function App ({ courseId }) {
       />
     )
   } else if (currentPage === 3) {
-    const body = {
-      course_id: courseId,
-      canvas_assignment: selectedAssignment.id,
-      ladok_module: selectedModule.id,
-      examination_date: examinationDate
-    }
-    return <WizardResult body={body} setCurrentPage={setCurrentPage} />
+    return (
+      <WizardResult
+        courseId={courseId}
+        selectedAssignment={selectedAssignment}
+        selectedModule={selectedModule}
+        examinationDate={examinationDate}
+        setCurrentPage={setCurrentPage}
+      />
+    )
   }
 }
 

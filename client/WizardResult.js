@@ -1,7 +1,19 @@
 import React from 'react'
 import { useFetch } from './react-hooks'
 
-function WizardResult ({ body, setCurrentPage }) {
+function WizardResult ({
+  courseId,
+  selectedAssignment,
+  selectedModule,
+  examinationDate,
+  setCurrentPage
+}) {
+  const body = {
+    course_id: courseId,
+    canvas_assignment: selectedAssignment.id,
+    ladok_module: selectedModule.id,
+    examination_date: examinationDate
+  }
   const { loading, error, data } = useFetch(`api/submitGrades`, 'POST', body)
 
   if (loading) return <div className='loader'>Loading...</div>
@@ -10,7 +22,16 @@ function WizardResult ({ body, setCurrentPage }) {
     return (
       <>
         <div className='alert alert-danger' aria-live='polite' role='alert'>
-          <p>The export experienced an error.</p>
+          <h2>An error occurred during export.</h2>
+          <p>
+            No results were exported.
+            <br />
+            From: <strong>{selectedAssignment.name}</strong>
+            <br />
+            To: <strong>{selectedModule.name}</strong>
+            <br />
+            Examination date: <strong>{examinationDate}</strong>
+          </p>
         </div>
         <div className='button-section'>
           <button
@@ -27,7 +48,16 @@ function WizardResult ({ body, setCurrentPage }) {
   return (
     <>
       <div className='alert alert-success' role='alert'>
-        <p>The export was successful.</p>
+        <h2>The export was successful.</h2>
+        <p>
+          {data.newLadokGrades.length} results have been exported.
+          <br />
+          From: <strong>{selectedAssignment.name}</strong>
+          <br />
+          To: <strong>{selectedModule.name}</strong>
+          <br />
+          Examination date: <strong>{examinationDate}</strong>
+        </p>
       </div>
       <h2>Mark as ready in Ladok</h2>
       <p>
