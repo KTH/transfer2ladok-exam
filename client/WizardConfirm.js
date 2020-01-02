@@ -58,7 +58,7 @@ function WizardConfirm({
         </p>
       </div>
       {showTable && (
-        <div>
+        <div className="table-container">
           <Table
             course={courseId}
             assignment={selectedAssignment}
