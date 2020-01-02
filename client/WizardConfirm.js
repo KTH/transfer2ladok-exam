@@ -17,7 +17,7 @@ function WizardConfirm({
         className="btn btn-secondary grid-col-1"
         onClick={event => setCurrentPage(1)}
       >
-        ← Assignments
+        ← Assignments and Date
       </button>
       <button
         type="button"
@@ -48,23 +48,6 @@ function WizardConfirm({
       >
         Export to Ladok
       </button>
-
-      {/*<ButtonModal
-        id="export"
-        type="submit"
-        btnLabel="Export to Ladok"
-        handleParentConfirm={() => {
-          setCurrentPage(3);
-        }}
-        modalLabels={{
-          header: "Confirm export",
-          body: `<br>Canvas assignment: <strong>${selectedAssignment.name}</strong><br>Ladok module: <strong>${selectedModule.name}</strong><br>Date: <strong>${examinationDate}</strong><br><br>Do you want to proceed?`,
-          btnCancel: "No, go back",
-          btnConfirm: "Yes, export"
-        }}
-        className="grid-col-3"
-        disabled={false}
-      />*/}
     </div>
   );
 
