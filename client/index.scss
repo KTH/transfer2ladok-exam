@@ -119,3 +119,40 @@ table thead, table tbody tr {
     display: table;
     table-layout: fixed;
 }
+
+
+#root {
+ display: flex;
+ flex-flow: column;
+ height: 100%;
+ max-height: 100%;
+}
+html {
+ height: 100%;
+}
+#root > form {
+ flex-grow: 1;
+ display: flex;
+ flex-flow: column;
+ height: 100%;
+ max-height: 100%;
+}
+.table-container {
+ height: 10em;
+ flex: 1 1 10em;
+ overflow: hidden;
+}
+table {
+ margin-bottom: 14px;
+ margin: 0;
+}
+table caption {
+ margin-top: 16px;
+ margin-bottom: 10px;
+}
+.alert {
+ flex: 0 0 auto;
+}
+.alert > p:nth-child(1) {
+ font-size: 0.7em;
+}

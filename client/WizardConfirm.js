@@ -58,16 +58,14 @@ function WizardConfirm({
         </p>
       </div>
       {showTable && (
-        <div className="table-container">
-          <Table
-            course={courseId}
-            assignment={selectedAssignment}
-            module={selectedModule}
-            date={examinationDate}
-          />
-          {tableFooter}
-        </div>
+        <Table
+          course={courseId}
+          assignment={selectedAssignment}
+          module={selectedModule}
+          date={examinationDate}
+        />
       )}
+      {showTable && tableFooter}
     </form>
   );
 }
