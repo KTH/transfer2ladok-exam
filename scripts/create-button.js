@@ -75,7 +75,7 @@ async function start() {
   const { buttonName } = await inquirer.prompt({
     name: "buttonName",
     message: "Select a name for the button",
-    default: "Results from existing assignments to Ladok (BETA)"
+    default: "KTH Överföring till Ladok (Beta)"
   });
 
   const body = {

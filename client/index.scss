@@ -156,10 +156,16 @@ table caption {
 .alert {
  flex: 0 0 auto;
 }
-.alert > p:nth-child(1) {
- font-size: 0.7em;
-}
+
 
 h2 {
   margin: 0px;
+}
+
+.alert, .alert-success {
+  font-size: 1em;
+}
+
+.success-h2 {
+  margin-top: 1em;
 }

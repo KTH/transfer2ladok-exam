@@ -20,7 +20,6 @@
   "license": "MIT",
   "dependencies": {
     "@kth/canvas-api": "^2.1.0",
-    "@kth/kth-style-react-components": "0.0.26",
     "@kth/reqvars": "^2.0.1",
     "body-parser": "^1.19.0",
     "bunyan": "^1.8.12",

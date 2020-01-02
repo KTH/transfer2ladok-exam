@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "./Table";
-import { ButtonModal } from "@kth/kth-style-react-components";
 
 function WizardConfirm({
   setCurrentPage,
@@ -27,7 +26,30 @@ function WizardConfirm({
       >
         Cancel
       </button>
-      <ButtonModal
+      <button
+        className="btn btn-primary grid-col-3"
+        onClick={evt => {
+          if (
+            window.confirm(
+              `
+              You are about to export results for:
+              Canvas assignment:${selectedAssignment.name}
+              Ladok module: ${selectedModule.name}
+              Examination Date: ${examinationDate}
+              
+              Do you want to proceed?`
+            )
+          ) {
+            setCurrentPage(3);
+          } else {
+            setCurrentPage(1);
+          }
+        }}
+      >
+        Export to Ladok
+      </button>
+
+      {/*<ButtonModal
         id="export"
         type="submit"
         btnLabel="Export to Ladok"
@@ -42,12 +64,12 @@ function WizardConfirm({
         }}
         className="grid-col-3"
         disabled={false}
-      />
+      />*/}
     </div>
   );
 
   return (
-    <form method="post">
+    <form>
       <h2>Export students with results (Step 2 of 2)</h2>
       <div className="alert alert-info" aria-live="polite" role="alert">
         <p>
