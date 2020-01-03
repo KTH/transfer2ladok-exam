@@ -15,9 +15,7 @@ function WizardResult({
     examination_date: examinationDate
   };
   const { loading, error, data } = useFetch(`api/submitGrades`, "POST", body);
-
   if (loading) return <div className="loader">Loading...</div>;
-
   if (error) {
     return (
       <>
@@ -32,6 +30,7 @@ function WizardResult({
             <br />
             Examination date: <strong>{examinationDate}</strong>
           </p>
+          <strong>{error.error}</strong>
         </div>
         <div className="button-section">
           <button

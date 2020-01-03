@@ -50,13 +50,9 @@ async function submitGrades(req, res) {
 
     res.send(result);
   } catch (err) {
-    if (err.name === "ExportError") {
-      throw err;
-    }
-
     err.name = "ExportError";
     log.error(err);
-    throw err;
+    res.status(500).send({ error: err.message });
   }
 }
 
