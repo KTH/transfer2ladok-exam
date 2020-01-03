@@ -1,44 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
-export function useFetch(url, method, body) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+export function useFetch (url, method, body) {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [data, setData] = useState(null)
 
-  async function fetchData() {
-    setLoading(true);
-    const options = { method: method || "GET" };
+  async function fetchData () {
+    setLoading(true)
+    const options = { method: method || 'GET' }
     if (body) {
-      options.body = JSON.stringify(body);
+      options.body = JSON.stringify(body)
       options.headers = {
-        "Content-Type": "application/json"
-      };
+        'Content-Type': 'application/json'
+      }
     }
-    let isOk;
+    let isOk
     window
       .fetch(url, options)
       .then(r => {
-        isOk = r.ok;
-        return r;
+        isOk = r.ok
+        return r
       })
       .then(r => r.json())
       .then(body => {
         if (isOk) {
-          setData(body);
+          setData(body)
         } else {
-          setError(body);
+          setError(body)
         }
-        setLoading(false);
+        setLoading(false)
       })
       .catch(r => {
-        setError(r);
-        setLoading(false);
-      });
+        setError(r)
+        setLoading(false)
+      })
   }
 
   useEffect(() => {
-    fetchData();
-  }, [url]);
+    fetchData()
+  }, [url])
 
-  return { loading, error, data };
+  return { loading, error, data }
 }

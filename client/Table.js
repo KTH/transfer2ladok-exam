@@ -1,27 +1,27 @@
-import React from "react";
-import { useFetch } from "./react-hooks";
+import React from 'react'
+import { useFetch } from './react-hooks'
 
-function Table({ course, assignment, module, date }) {
+function Table ({ course, assignment, module, date }) {
   const { loading, error, data } = useFetch(
     `api/table?course_id=${course}&assignment_id=${assignment.id}&module_id=${module.id}`
-  );
+  )
 
-  if (loading) return <div className="loader">Loading...</div>;
+  if (loading) return <div className='loader'>Loading...</div>
 
-  if (error) return <div>error</div>;
+  if (error) return <div>error</div>
 
   const sortedList = data
     .slice()
-    .sort((a, b) => a.name.localeCompare(b.name, "sv"));
+    .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
 
   return (
     <>
       <p>
-        <span className="font-weight-bold">Selected examination date:</span>{" "}
+        <span className='font-weight-bold'>Selected examination date:</span>{' '}
         {date}
       </p>
-      <div className="table-container">
-        <table border="1">
+      <div className='table-container'>
+        <table border='1'>
           <caption>Number of students: {sortedList.length}</caption>
           <thead>
             <tr>
@@ -42,7 +42,7 @@ function Table({ course, assignment, module, date }) {
         </table>
       </div>
     </>
-  );
+  )
 }
 
-export default Table;
+export default Table
