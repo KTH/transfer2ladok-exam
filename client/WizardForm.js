@@ -59,16 +59,28 @@ function WizardForm({
           <option value="" disabled hidden>
             Select assignment
           </option>
-          {allAssignments.map(assignment => (
-            <option
-              key={assignment.id}
-              value={assignment.id}
-              disabled={!assignment.published}
-            >
-              {assignment.name}: {assignment.grading_type.replace("_", " ")}
-              {assignment.published ? "" : " NOT PUBLISHED"}
-            </option>
-          ))}
+          {// sort letter grade first, then the rest grouped by grading type
+          allAssignments
+            .sort((a, b) => {
+              if (a.grading_type === "letter_grade") {
+                return -1;
+              } else if (a.grading_type === b.grading_type) {
+                return 0;
+              } else {
+                return 1;
+              }
+            })
+            .map(assignment => (
+              <option
+                key={assignment.id}
+                value={assignment.id}
+                disabled={!assignment.published}
+              >
+                {}
+                {assignment.name}: {assignment.grading_type.replace("_", " ")}
+                {assignment.published ? "" : " NOT PUBLISHED"}
+              </option>
+            ))}
         </select>
       </div>
       <h2>Ladok Module</h2>
