@@ -33,7 +33,7 @@ function WizardForm ({
       className={buttonClassNames}
       disabled={disabled}
       title={title}
-      onClick={event => setCurrentPage(2)}
+      onClick={() => setCurrentPage(2)}
     >
       Students →
     </button>

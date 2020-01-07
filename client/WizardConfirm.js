@@ -15,20 +15,20 @@ function WizardConfirm ({
       <button
         type='button'
         className='btn btn-secondary grid-col-1'
-        onClick={event => setCurrentPage(1)}
+        onClick={() => setCurrentPage(1)}
       >
         ← Assignments and Date
       </button>
       <button
         type='button'
         className='btn btn-secondary grid-col-2'
-        onClick={event => setCurrentPage(0)}
+        onClick={() => setCurrentPage(0)}
       >
         Cancel
       </button>
       <button
         className='btn btn-primary grid-col-3'
-        onClick={evt => {
+        onClick={() => {
           if (
             window.confirm(
               `
@@ -36,7 +36,7 @@ function WizardConfirm ({
               Canvas assignment:${selectedAssignment.name}
               Ladok module: ${selectedModule.name}
               Examination Date: ${examinationDate}
-              
+
               Do you want to proceed?`
             )
           ) {

@@ -35,7 +35,7 @@ function WizardResult ({
         <div className='button-section'>
           <button
             className='btn btn-success grid-col-3'
-            onClick={event => setCurrentPage(1)}
+            onClick={() => setCurrentPage(1)}
           >
             Done
           </button>
