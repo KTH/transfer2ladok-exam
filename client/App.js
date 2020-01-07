@@ -1,34 +1,33 @@
-import { hot } from "react-hot-loader/root";
-import React, { useState } from "react";
-import WizardResult from "./WizardResult";
-import { useFetch } from "./react-hooks";
-import WizardForm from "./WizardForm";
-import WizardConfirm from "./WizardConfirm";
+import { hot } from 'react-hot-loader/root'
+import React, { useState } from 'react'
+import WizardResult from './WizardResult'
+import { useFetch } from './react-hooks'
+import WizardForm from './WizardForm'
+import WizardConfirm from './WizardConfirm'
 
-function App({ courseId }) {
+function App ({ courseId }) {
   const { loading, error, data } = useFetch(
     `api/course-info?course_id=${courseId}`
-  );
+  )
 
-  const [selectedAssignment, setAssignment] = useState(null);
-  const [selectedModule, setModule] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [examinationDate, setExaminationDate] = useState("");
+  const [selectedAssignment, setAssignment] = useState(null)
+  const [selectedModule, setModule] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [examinationDate, setExaminationDate] = useState('')
 
-  if (loading) return <div className="loader">Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (loading) return <div className='loader'>Loading...</div>
+  if (error) return <div>Error</div>
 
-  const allAssignments = [].concat(data.canvasAssignments);
-
-  const allModules = [].concat(data.ladokModules);
+  const allAssignments = data.canvasAssignments
+  const allModules = data.ladokModules
 
   if (currentPage === 0) {
     return (
-      <h1 className="alert alert-success">
+      <h1 className='alert alert-success'>
         Export cancelled. You can safely leave this page and go wherever you
         want to.
       </h1>
-    );
+    )
   } else if (currentPage === 1) {
     return (
       <WizardForm
@@ -42,7 +41,7 @@ function App({ courseId }) {
         setAssignment={setAssignment}
         allAssignments={allAssignments}
       />
-    );
+    )
   } else if (currentPage === 2) {
     return (
       <WizardConfirm
@@ -52,7 +51,7 @@ function App({ courseId }) {
         examinationDate={examinationDate}
         courseId={courseId}
       />
-    );
+    )
   } else if (currentPage === 3) {
     return (
       <WizardResult
@@ -62,8 +61,8 @@ function App({ courseId }) {
         examinationDate={examinationDate}
         setCurrentPage={setCurrentPage}
       />
-    );
+    )
   }
 }
 
-export default hot(App);
+export default hot(App)
