@@ -1,7 +1,9 @@
 import { hot } from 'react-hot-loader/root'
 import React, { useState } from 'react'
-import Table from './Table'
-import { useFetch, useValidatedState } from './react-hooks'
+import WizardResult from './WizardResult'
+import { useFetch } from './react-hooks'
+import WizardForm from './WizardForm'
+import WizardConfirm from './WizardConfirm'
 
 function App ({ courseId }) {
   const { loading, error, data } = useFetch(
@@ -10,67 +12,57 @@ function App ({ courseId }) {
 
   const [selectedAssignment, setAssignment] = useState(null)
   const [selectedModule, setModule] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [examinationDate, setExaminationDate] = useState('')
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div className='loader'>Loading...</div>
   if (error) return <div>Error</div>
 
-  const allAssignments = [
-    { id: 0, name: 'Choose an assignment in Canvas' }
-  ].concat(data.canvasAssignments)
+  const allAssignments = data.canvasAssignments
+  const allModules = data.ladokModules
 
-  const allModules = [{ id: 0, name: 'Choose a module in Ladok' }].concat(
-    data.ladokModules
-  )
-
-  const showTable = selectedAssignment && selectedModule
-
-  return (
-    <div>
-      <h2>Canvas assignment</h2>
-      <select
-        name='canvas_assignment'
-        onChange={event => setAssignment(event.target.value)}
-      >
-        {allAssignments.map(assignment => (
-          <option key={assignment.id} value={assignment.id}>
-            {assignment.name}
-          </option>
-        ))}
-      </select>
-      <h2>Ladok Module</h2>
-      <select
-        name='ladok_module'
-        onChange={event => setModule(event.target.value)}
-      >
-        {allModules.map(ladokModule => (
-          <option key={ladokModule.id} value={ladokModule.id}>
-            {ladokModule.name} - {ladokModule.title}
-          </option>
-        ))}
-      </select>
-      <h2>Examination Date</h2>
-      <p>
-        Required field. When exporting to Ladok, all students will receive the
-        same Examination Date. If you need to set a different date individually,
-        please change it in Ladok after exporting.
-      </p>
-      <input name='examination_date' type='date' required />
-
-      <input type='hidden' name='course_id' value={courseId} />
-
-      <h2>Click to export</h2>
-      <button type='submit'>Export to Ladok</button>
-
-      <h2>Here you can see the grades of the selected assignment/module</h2>
-      {showTable && (
-        <Table
-          course={courseId}
-          assignment={selectedAssignment}
-          module={selectedModule}
-        />
-      )}
-    </div>
-  )
+  if (currentPage === 0) {
+    return (
+      <h1 className='alert alert-success'>
+        Export cancelled. You can safely leave this page and go wherever you
+        want to.
+      </h1>
+    )
+  } else if (currentPage === 1) {
+    return (
+      <WizardForm
+        setCurrentPage={setCurrentPage}
+        examinationDate={examinationDate}
+        setExaminationDate={setExaminationDate}
+        selectedModule={selectedModule}
+        setModule={setModule}
+        allModules={allModules}
+        selectedAssignment={selectedAssignment}
+        setAssignment={setAssignment}
+        allAssignments={allAssignments}
+      />
+    )
+  } else if (currentPage === 2) {
+    return (
+      <WizardConfirm
+        setCurrentPage={setCurrentPage}
+        selectedAssignment={selectedAssignment}
+        selectedModule={selectedModule}
+        examinationDate={examinationDate}
+        courseId={courseId}
+      />
+    )
+  } else if (currentPage === 3) {
+    return (
+      <WizardResult
+        courseId={courseId}
+        selectedAssignment={selectedAssignment}
+        selectedModule={selectedModule}
+        examinationDate={examinationDate}
+        setCurrentPage={setCurrentPage}
+      />
+    )
+  }
 }
 
 export default hot(App)

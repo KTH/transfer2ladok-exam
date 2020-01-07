@@ -1,35 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-export function useFetch (url) {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState(null)
+export function useFetch(url, method, body) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
-  async function fetchData () {
-    setLoading(true)
-
+  async function fetchData() {
+    setLoading(true);
+    const options = { method: method || "GET" };
+    if (body) {
+      options.body = JSON.stringify(body);
+      options.headers = {
+        "Content-Type": "application/json"
+      };
+    }
+    let isOk;
     window
-      .fetch(url)
+      .fetch(url, options)
       .then(r => {
-        if (!r.ok) {
-          throw new Error(r.statusText)
-        }
-        return r
+        isOk = r.ok;
+        return r;
       })
       .then(r => r.json())
       .then(body => {
-        setData(body)
-        setLoading(false)
+        if (isOk) {
+          setData(body);
+        } else {
+          setError(body);
+        }
       })
       .catch(r => {
-        setError(r)
-        setLoading(false)
+        setError(r);
       })
+      .finally(r => setLoading(false));
   }
 
   useEffect(() => {
-    fetchData()
-  }, [url])
+    fetchData();
+  }, [url]);
 
-  return { loading, error, data }
+  return { loading, error, data };
 }

@@ -12,8 +12,7 @@ async function authorize (req, res, next) {
     throw new Error('No access data found')
   }
 
-  // TODO: this should be !== to work!
-  if (accessData.realUserId && accessData.userId === accessData.realUserId) {
+  if (accessData.realUserId && accessData.userId !== accessData.realUserId) {
     throw new ClientError(
       'not_allowed',
       'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
@@ -25,7 +24,7 @@ async function authorize (req, res, next) {
     if (!allowedInLadok) {
       throw new ClientError(
         'not_allowed',
-        'You must have permissions to write results in Ladok to use this export.'
+        'You must have permissions to write results in Ladok to use this function.'
       )
     }
     const allowedIncanvas = await isAllowed.isAllowedInCanvas(
@@ -36,7 +35,7 @@ async function authorize (req, res, next) {
     if (!allowedIncanvas) {
       throw new ClientError(
         'not_allowed',
-        'Only teachers etcetera can use this app.'
+        'Only teachers and examiners are allowed to use this app.'
       )
     }
   } catch (err) {

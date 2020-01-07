@@ -6,8 +6,7 @@ module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
   entry: {
-    index: ['webpack-hot-middleware/client', './index.scss', './index.js'],
-    feedback: ['./feedback.js']
+    index: ['webpack-hot-middleware/client', './index.scss', './index.js']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

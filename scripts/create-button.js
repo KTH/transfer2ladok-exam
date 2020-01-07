@@ -6,7 +6,7 @@ async function start () {
   const { canvasApiUrl } = await inquirer.prompt({
     type: 'list',
     name: 'canvasApiUrl',
-    message: 'Choose a Canvas instance',
+    message: 'Select a Canvas instance',
     choices: [
       {
         name: 'test',
@@ -76,8 +76,8 @@ async function start () {
 
   const { buttonName } = await inquirer.prompt({
     name: 'buttonName',
-    message: 'Choose a name for the button',
-    default: 'Results from existing assignments to Ladok (BETA)'
+    message: 'Select a name for the button',
+    default: 'KTH Överföring till Ladok (Beta)'
   })
 
   const body = {
