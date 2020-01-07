@@ -24,7 +24,7 @@ async function authorize(req, res, next) {
     if (!allowedInLadok) {
       throw new ClientError(
         "not_allowed",
-        "You must have permissions to write results in Ladok to use this export."
+        "You must have permissions to write results in Ladok to use this function."
       );
     }
     const allowedIncanvas = await isAllowed.isAllowedInCanvas(
