@@ -17,15 +17,15 @@ function WizardForm ({
   if (!selectedAssignment) {
     disabled = true
     title = 'Select an assignment in Canvas first'
-    buttonClassNames = buttonClassNames.concat(' ', 'disabled')
+    buttonClassNames += ' disabled'
   } else if (!selectedModule) {
     disabled = true
     title = 'Select a module in Ladok first'
-    buttonClassNames = buttonClassNames.concat(' ', 'disabled')
+    buttonClassNames += ' disabled'
   } else if (!examinationDate) {
     disabled = true
     title = 'Select an examination date first'
-    buttonClassNames = buttonClassNames.concat(' ', 'disabled')
+    buttonClassNames += ' disabled'
   }
 
   const nextButton = (
