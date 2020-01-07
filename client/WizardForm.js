@@ -64,10 +64,10 @@ function WizardForm ({
             .sort((a, b) => {
               if (a.grading_type === 'letter_grade') {
                 return -1
-              } else if (a.grading_type === b.grading_type) {
-                return 0
-              } else {
+              } else if (b.grading_type === 'letter_grade') {
                 return 1
+              } else {
+                return a.name.localeCompare(b.name)
               }
             })
             .map(assignment => (
