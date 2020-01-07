@@ -40,7 +40,7 @@ function WizardForm ({
   )
 
   return (
-    <div className='form-group'>
+    <div className='form-group form-select'>
       <h1>Select assignment and date (Step 1 of 2)</h1>
       <h2>Canvas assignment</h2>
       <p>Note that only letter grades will be sent to Ladok</p>
