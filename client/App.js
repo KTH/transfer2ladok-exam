@@ -22,7 +22,6 @@ function App({ courseId }) {
 
   const allModules = [].concat(data.ladokModules);
 
-  let content = "";
   if (currentPage === 0) {
     return (
       <h1 className="alert alert-success">
