@@ -14,6 +14,17 @@ function Table ({ course, assignment, module, date }) {
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
 
+  let gradesToSend = 0
+  for (const student of sortedList) {
+    const eligibleGrade =
+      student.ladokGrade.existsInLadok &&
+      student.canvasGrade &&
+      student.canvasGrade !== student.ladokGrade.letter
+    if (eligibleGrade) {
+      gradesToSend++
+    }
+  }
+
   return (
     <>
       <p>
@@ -22,7 +33,9 @@ function Table ({ course, assignment, module, date }) {
       </p>
       <div className='table-container'>
         <table border='1'>
-          <caption>Number of students: {sortedList.length}</caption>
+          <caption>
+            Can export {gradesToSend}/{sortedList.length} grades:
+          </caption>
           <thead>
             <tr>
               <th>Student</th>
@@ -35,7 +48,7 @@ function Table ({ course, assignment, module, date }) {
               <tr key={i}>
                 <td>{row.name}</td>
                 <td>{row.canvasGrade}</td>
-                <td>{row.ladokGrade}</td>
+                <td>{row.ladokGrade.letter}</td>
               </tr>
             ))}
           </tbody>
