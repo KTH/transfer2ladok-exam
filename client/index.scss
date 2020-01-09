@@ -129,6 +129,27 @@ h2 {
   margin-bottom: 2em;
 }
 
+.do-export-row {
+  > td {
+    background-color: $infoGreen;
+  }
+  > td:last-child {
+    background: url('svgs/check.svg') no-repeat center;
+    background-color: $infoGreen;
+  }
+}
+
+.dont-export-row {
+  > td {
+    background-color: $infoRed;
+  }
+
+  > td:last-child {
+    background: url('svgs/times.svg') no-repeat center;
+    background-color: $infoRed;
+  }
+}
+
 /* Loading Spinner, courtesy of lukehaas (https://github.com/lukehaas/css-loaders) */
 .loader,
 .loader:after {
