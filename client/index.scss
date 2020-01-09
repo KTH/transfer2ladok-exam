@@ -133,21 +133,18 @@ h2 {
   > td {
     background-color: $infoGreen;
   }
-  > td:last-child {
-    background: url('svgs/check.svg') no-repeat center;
-    background-color: $infoGreen;
-  }
 }
 
-.dont-export-row {
-  > td {
-    background-color: $infoRed;
-  }
+.table-col-1 {
+  width: 50%;
+}
 
-  > td:last-child {
-    background: url('svgs/times.svg') no-repeat center;
-    background-color: $infoRed;
-  }
+.table-col-2 {
+  width: 25%;
+}
+
+.table-col-3 {
+  width: 25%;
 }
 
 /* Loading Spinner, courtesy of lukehaas (https://github.com/lukehaas/css-loaders) */
