@@ -129,6 +129,24 @@ h2 {
   margin-bottom: 2em;
 }
 
+.do-export-row {
+  > td {
+    background-color: $infoGreen;
+  }
+}
+
+.table-col-1 {
+  width: 50%;
+}
+
+.table-col-2 {
+  width: 25%;
+}
+
+.table-col-3 {
+  width: 25%;
+}
+
 /* Loading Spinner, courtesy of lukehaas (https://github.com/lukehaas/css-loaders) */
 .loader,
 .loader:after {

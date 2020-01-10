@@ -13,42 +13,48 @@ function Table ({ course, assignment, module, date }) {
   const sortedList = data
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
-
-  let gradesToSend = 0
+  const studentRows = []
   for (const student of sortedList) {
-    const eligibleGrade =
-      student.ladokGrade.existsInLadok &&
+    const isTransferrable =
+      student.ladokGradeData.existsAsDraft &&
       student.canvasGrade &&
-      student.canvasGrade !== student.ladokGrade.letter
-    if (eligibleGrade) {
-      gradesToSend++
-    }
+      student.canvasGrade !== student.ladokGradeData.letter
+    studentRows.push({ student, isTransferrable })
   }
-
   return (
     <>
       <p>
-        <span className='font-weight-bold'>Selected examination date:</span>{' '}
-        {date}
+        From: <span className='font-weight-bold'>{assignment.name}</span>
+        <br />
+        To: <span className='font-weight-bold'>{module.name}</span>
+        <br />
+        Selected examination date:&nbsp;
+        <span className='font-weight-bold'>{date}</span>
       </p>
       <div className='table-container'>
         <table border='1'>
           <caption>
-            Can export {gradesToSend}/{sortedList.length} grades:
+            Can export {studentRows.filter(row => row.isTransferrable).length}/
+            {studentRows.length} grades:
           </caption>
           <thead>
             <tr>
-              <th>Student</th>
-              <th>Canvas: {assignment.name}</th>
-              <th>Ladok: {module.name}</th>
+              <th className='table-col-1'>Student</th>
+              <th className='table-col-2'>Canvas grade</th>
+              <th className='table-col-3'>Transferrable</th>
             </tr>
           </thead>
           <tbody>
-            {sortedList.map((row, i) => (
-              <tr key={i}>
-                <td>{row.name}</td>
-                <td>{row.canvasGrade}</td>
-                <td>{row.ladokGrade.letter}</td>
+            {studentRows.map((row, i) => (
+              <tr
+                key={i}
+                className={row.isTransferrable ? 'do-export-row' : ''}
+              >
+                <td className='table-col-1'>{row.student.name}</td>
+                <td className='table-col-2'>{row.student.canvasGrade}</td>
+                <td className='table-col-3'>
+                  {row.isTransferrable ? 'Yes' : ''}
+                </td>
               </tr>
             ))}
           </tbody>
