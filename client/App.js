@@ -24,8 +24,7 @@ function App ({ courseId }) {
   if (currentPage === 0) {
     return (
       <h1 className='alert alert-success'>
-        Export cancelled. You can safely leave this page and go wherever you
-        want to.
+        Transfer cancelled. You can safely leave this page.
       </h1>
     )
   } else if (currentPage === 1) {

@@ -32,7 +32,7 @@ function WizardConfirm ({
           if (
             window.confirm(
               `
-              You are about to export results for:
+              You are about to transfer grades for:
               Canvas assignment:${selectedAssignment.name}
               Ladok module: ${selectedModule.name}
               Examination Date: ${examinationDate}
@@ -46,20 +46,25 @@ function WizardConfirm ({
           }
         }}
       >
-        Export to Ladok
+        Transfer to Ladok
       </button>
     </div>
   )
 
   return (
     <form>
-      <h2>Export students with results (Step 2 of 2)</h2>
+      <h2>Transfer grades (Step 2 of 2)</h2>
+      <p>
+        The list below represents what the application will transfer from Canvas
+        to draft status in Ladok once you click the <i>Transfer to Ladok</i>{' '}
+        button.
+      </p>
       <div className='alert alert-info' aria-live='polite' role='alert'>
         <p>
-          Note that the results of students are based on data fetched from
-          Canvas Gradebook during launch of this application. If you have
-          entered a result very recently and it is missing, you might have to
-          relaunch the application.
+          Note that the grades of students are based on data fetched from Canvas
+          Gradebook during launch of this application. If you have entered a
+          grade very recently and it is missing, you might have to relaunch the
+          application.
         </p>
       </div>
       {showTable && (

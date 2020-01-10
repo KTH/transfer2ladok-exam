@@ -20,9 +20,9 @@ function WizardResult ({
     return (
       <>
         <div className='alert alert-danger' aria-live='polite' role='alert'>
-          <h2>An error occurred during export.</h2>
+          <h2>An error has occurred during the transfer.</h2>
           <p>
-            No results were exported.
+            No grades were transferred.
             <br />
             From: <strong>{selectedAssignment.name}</strong>
             <br />
@@ -30,7 +30,16 @@ function WizardResult ({
             <br />
             Examination date: <strong>{examinationDate}</strong>
           </p>
-          <strong>{error.error}</strong>
+          <p>
+            <strong>{error.error}</strong>
+          </p>
+          <p>
+            <em>
+              If you need help,{' '}
+              <a href='mailto:it-support@kth.se'>contact IT support</a>, and
+              include the error description.
+            </em>
+          </p>
         </div>
         <div className='button-section'>
           <button
@@ -47,9 +56,9 @@ function WizardResult ({
   return (
     <>
       <div className='alert alert-success' role='alert'>
-        <h2>The export was successful.</h2>
+        <h2>The transfer was successful.</h2>
         <p>
-          {data.newLadokGrades.length} results have been exported.
+          {data.newLadokGrades.length} results have been transferred.
           <br />
           From: <strong>{selectedAssignment.name}</strong>
           <br />
@@ -58,15 +67,16 @@ function WizardResult ({
           Examination date: <strong>{examinationDate}</strong>
         </p>
       </div>
-      <h2 className='success-h2'>Mark as ready in Ladok</h2>
+      <h2 className='success-h2'>Continue the grading process in Ladok</h2>
       <p>
-        The grading process continues in Ladok where you can now mark the
-        exported grades as ready. Here is a{' '}
+        The rest of the grading process is carried out in Ladok. Here is a{' '}
         <a href={data.ladokLink} target='_blank' rel='noreferrer noopener'>
-          link
+          direct link
         </a>{' '}
-        to the relevant module in Ladok. Note that you might have to click the
-        link twice if you are prompted to log in to Ladok the first time.
+        to the module in Ladok to which the grades have been transferred. <br />
+        <b>Note:</b> If you are prompted to log in to Ladok the first time you
+        click the link you will have to click it again to arrive at the module
+        in Ladok.
       </p>
       <div className='button-section'>
         <button
