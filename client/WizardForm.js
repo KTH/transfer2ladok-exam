@@ -14,7 +14,6 @@ function WizardForm ({
   let disabled = false
   let title = ''
   let buttonClassNames = 'btn btn-next btn-success grid-col-3'
-
   if (!selectedAssignment) {
     disabled = true
     title = 'Select an assignment in Canvas first'
@@ -86,6 +85,7 @@ function WizardForm ({
       </div>
       <h2>Ladok Module</h2>
       <p>To which Ladok module do you want the grades to be transferred?</p>
+
       <div className='select-wrapper'>
         <select
           className='custom-select'
