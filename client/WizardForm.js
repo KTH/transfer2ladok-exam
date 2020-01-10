@@ -13,7 +13,7 @@ function WizardForm ({
 }) {
   let disabled = false
   let title = ''
-  let buttonClassNames = 'btn btn-success grid-col-3'
+  let buttonClassNames = 'btn btn-next btn-success grid-col-3'
   if (!selectedAssignment) {
     disabled = true
     title = 'Select an assignment in Canvas first'
@@ -35,7 +35,7 @@ function WizardForm ({
       title={title}
       onClick={() => setCurrentPage(2)}
     >
-      Students →
+      Students
     </button>
   )
 
@@ -43,7 +43,7 @@ function WizardForm ({
     <div className='form-group form-select'>
       <h1>Select assignment and date (Step 1 of 2)</h1>
       <h2>Canvas assignment</h2>
-      <p>Note that only letter grades will be sent to Ladok</p>
+      <p>Note that only letter grades will be sent to Ladok (A-F & P/F)</p>
       <div className='select-wrapper'>
         <select
           className='custom-select'
@@ -84,7 +84,8 @@ function WizardForm ({
         </select>
       </div>
       <h2>Ladok Module</h2>
-      <p>To which Ladok module do you want the results to be exported?</p>
+      <p>To which Ladok module do you want the grades to be transferred?</p>
+
       <div className='select-wrapper'>
         <select
           className='custom-select'
@@ -109,9 +110,9 @@ function WizardForm ({
       </div>
       <h2>Examination Date</h2>
       <p>
-        Required field. When exporting to Ladok, all effected results will
-        receive the same Examination Date. If you need to set a different date
-        individually, please change it in Ladok after exporting.
+        When transferring to Ladok, all affected grades will receive the same
+        Examination Date. If you need to set a different date on an individual
+        level, please change it in Ladok after transferring.
       </p>
       <input
         name='examination_date '
