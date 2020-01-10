@@ -14,10 +14,10 @@ function WizardConfirm ({
     <div className='button-section'>
       <button
         type='button'
-        className='btn btn-secondary grid-col-1'
+        className='btn btn-back btn-secondary grid-col-1'
         onClick={() => setCurrentPage(1)}
       >
-        ← Assignments and Date
+        Assignments and Date
       </button>
       <button
         type='button'
