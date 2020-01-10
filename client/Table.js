@@ -14,16 +14,13 @@ function Table ({ course, assignment, module, date }) {
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
 
-  const tableData = { transferableGrades: 0, students: [] }
+  const studentRows = []
   for (const student of sortedList) {
-    const isTransferable =
+    const isTransferrable =
       student.ladokGradeData.existsAsDraft &&
       student.canvasGrade &&
       student.canvasGrade !== student.ladokGradeData.letter
-    tableData.students.push({ student, isTransferable })
-    if (isTransferable) {
-      tableData.transferableGrades++
-    }
+    studentRows.push({ student, isTransferrable })
   }
 
   return (
@@ -41,23 +38,26 @@ function Table ({ course, assignment, module, date }) {
       <div className='table-container'>
         <table border='1'>
           <caption>
-            Can export {tableData.transferableGrades}/
-            {tableData.students.length} grades:
+            Can export {studentRows.filter(row => row.isTransferrable).length}/
+            {studentRows.length} grades:
           </caption>
           <thead>
             <tr>
               <th className='table-col-1'>Student</th>
               <th className='table-col-2'>Canvas grade</th>
-              <th className='table-col-3'>Transferable</th>
+              <th className='table-col-3'>Transferrable</th>
             </tr>
           </thead>
           <tbody>
-            {tableData.students.map((row, i) => (
-              <tr key={i} className={row.isTransferable ? 'do-export-row' : ''}>
+            {studentRows.map((row, i) => (
+              <tr
+                key={i}
+                className={row.isTransferrable ? 'do-export-row' : ''}
+              >
                 <td className='table-col-1'>{row.student.name}</td>
                 <td className='table-col-2'>{row.student.canvasGrade}</td>
                 <td className='table-col-3'>
-                  {row.isTransferable ? 'Yes' : ''}
+                  {row.isTransferrable ? 'Yes' : ''}
                 </td>
               </tr>
             ))}
