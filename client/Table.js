@@ -13,7 +13,6 @@ function Table ({ course, assignment, module, date }) {
   const sortedList = data
     .slice()
     .sort((a, b) => a.name.localeCompare(b.name, 'sv'))
-
   const studentRows = []
   for (const student of sortedList) {
     const isTransferrable =
@@ -22,18 +21,15 @@ function Table ({ course, assignment, module, date }) {
       student.canvasGrade !== student.ladokGradeData.letter
     studentRows.push({ student, isTransferrable })
   }
-
   return (
     <>
       <p>
-        <span className='font-weight-bold'>From:</span> {assignment.name}
+        From: <span className='font-weight-bold'>{assignment.name}</span>
         <br />
-        <span className='font-weight-bold'>To:</span> {module.name}
+        To: <span className='font-weight-bold'>{module.name}</span>
         <br />
-        <span className='font-weight-bold'>
-          Selected examination date:
-        </span>{' '}
-        {date}
+        Selected examination date:&nbsp;
+        <span className='font-weight-bold'>{date}</span>
       </p>
       <div className='table-container'>
         <table border='1'>
