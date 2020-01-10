@@ -11,9 +11,10 @@ function WizardForm({
   setAssignment,
   allAssignments
 }) {
-  let disabled = false;
-  let title = "";
-  let buttonClassNames = "btn btn-success grid-col-3";
+  let disabled = false
+  let title = ''
+  let buttonClassNames = 'btn btn-next btn-success grid-col-3'
+
   if (!selectedAssignment) {
     disabled = true;
     title = "Select an assignment in Canvas first";
@@ -35,7 +36,7 @@ function WizardForm({
       title={title}
       onClick={() => setCurrentPage(2)}
     >
-      Students →
+      Students
     </button>
   );
 
