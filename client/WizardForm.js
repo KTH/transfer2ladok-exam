@@ -42,6 +42,12 @@ function WizardForm ({
   return (
     <div className='form-group form-select'>
       <h1>Select assignment and date (Step 1 of 2)</h1>
+      <p>
+        To be able to send grades to from Canvas to Ladok, you need to map a
+        Canvas assignment to a Ladok module. Please select both a Canvas
+        assignment as source, a Ladok module as target and an examination date
+        for the grades to be sent, before you can proceed.
+      </p>
       <h2>Canvas assignment</h2>
       <p>Note that only letter grades will be sent to Ladok (A-F & P/F)</p>
       <div className='select-wrapper'>
