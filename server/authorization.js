@@ -9,7 +9,7 @@ async function authorize (req, res, next) {
   req.accessData = accessData
 
   if (!accessData) {
-    throw new Error('No access data found')
+    throw new Error('No access data found in request or cookie.')
   }
 
   if (accessData.realUserId && accessData.userId !== accessData.realUserId) {

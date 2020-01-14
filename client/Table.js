@@ -8,7 +8,7 @@ function Table ({ course, assignment, module, date }) {
 
   if (loading) return <div className='loader'>Loading...</div>
 
-  if (error) return <div>error</div>
+  if (error) return <div>An error occurred: {error.error}</div>
 
   const sortedList = data
     .slice()
