@@ -15,7 +15,8 @@ const {
   submitGrades,
   listCourseData,
   listGradesData,
-  handleExportError
+  handleHtmlErrors,
+  handleApiErrors
 } = require('./export-to-ladok')
 const cuid = require('cuid')
 
@@ -64,12 +65,13 @@ router.get('/_monitor', system.monitor)
 router.get('/_monitor_all', system.monitor)
 router.get('/_about', system.about)
 router.use('/api', apiRouter)
-router.use(handleExportError)
+router.use(handleHtmlErrors)
 
 apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
 apiRouter.post('/submitGrades', submitGrades)
+apiRouter.use(handleApiErrors)
 
 server.use(PROXY_PATH, router)
 server.use(function catchKnownError (err, req, res, next) {
