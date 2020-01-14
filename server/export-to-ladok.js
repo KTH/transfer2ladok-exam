@@ -104,7 +104,11 @@ function handleHtmlErrors (err, req, res, next) {
 }
 
 function handleApiErrors (err, req, res, next) {
-  res.status(500).send({ error: err.message })
+  if (err.name === 'ClientError') {
+    res.status(500).send({ error: err.message })
+  } else {
+    res.status(500).send({ error: 'A generic error occured.' })
+  }
 }
 
 module.exports = {
