@@ -104,6 +104,7 @@ function handleHtmlErrors (err, req, res, next) {
 }
 
 function handleApiErrors (err, req, res, next) {
+  log.info('An error occured', err)
   if (err.name === 'ClientError') {
     res.status(500).send({ error: err.message })
   } else {
