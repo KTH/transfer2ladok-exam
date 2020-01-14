@@ -24,7 +24,7 @@ async function authorize (req, res, next) {
     if (!allowedInLadok) {
       throw new ClientError(
         'not_allowed',
-        'You must have permissions to write results in Ladok to use this function.'
+        'You must have permissions to write results in Ladok to use this function. Contact ladok@kth.se if you need help.'
       )
     }
     const allowedIncanvas = await isAllowed.isAllowedInCanvas(
@@ -35,7 +35,7 @@ async function authorize (req, res, next) {
     if (!allowedIncanvas) {
       throw new ClientError(
         'not_allowed',
-        'Only teachers and examiners are allowed to use this app.'
+        'Only teachers and examiners are allowed to use this app. Contact it-support@kth.se if you need help.'
       )
     }
   } catch (err) {
