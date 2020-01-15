@@ -36,24 +36,18 @@ async function showForm (req, res) {
 }
 
 async function submitGrades (req, res) {
-  try {
-    log.info(
-      `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
-    )
-    const result = await sendGradesToLadok(
-      req.body.course_id,
-      req.body.canvas_assignment,
-      req.body.ladok_module,
-      req.body.examination_date,
-      req.signedCookies.access_data.token
-    )
+  log.info(
+    `Sending grades of course ${req.body.course_id} - assignment ${req.body.canvas_assignment} to Ladok Module ${req.body.ladok_module}`
+  )
+  const result = await sendGradesToLadok(
+    req.body.course_id,
+    req.body.canvas_assignment,
+    req.body.ladok_module,
+    req.body.examination_date,
+    req.signedCookies.access_data.token
+  )
 
-    res.send(result)
-  } catch (err) {
-    err.name = 'ExportError'
-    log.error(err)
-    res.status(500).send({ error: err.message })
-  }
+  res.send(result)
 }
 
 async function listCourseData (req, res) {
@@ -93,7 +87,7 @@ async function listGradesData (req, res) {
   res.send(data)
 }
 
-function handleExportError (err, req, res, next) {
+function handleHtmlErrors (err, req, res, next) {
   if (err.name !== 'ExportError') {
     next(err)
     return
@@ -109,6 +103,15 @@ function handleExportError (err, req, res, next) {
   })
 }
 
+function handleApiErrors (err, req, res, next) {
+  log.info('An error occured', err)
+  if (err.name === 'ClientError') {
+    res.status(500).send({ error: err.message })
+  } else {
+    res.status(500).send({ error: 'A generic error occured.' })
+  }
+}
+
 module.exports = {
   rootPage,
   startPage,
@@ -116,5 +119,6 @@ module.exports = {
   submitGrades,
   listCourseData,
   listGradesData,
-  handleExportError
+  handleHtmlErrors,
+  handleApiErrors
 }
