@@ -21,7 +21,7 @@ const {
 const cuid = require('cuid')
 
 const server = express()
-server.set('views', __dirname + '/views')
+server.set('views', path.join(__dirname, '/views'))
 server.engine('handlebars', expressHandlebars())
 server.set('view engine', 'handlebars')
 
