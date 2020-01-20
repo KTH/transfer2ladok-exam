@@ -16,7 +16,7 @@ function App ({ courseId }) {
   const [examinationDate, setExaminationDate] = useState('')
 
   if (loading) return <div className='loader'>Loading...</div>
-  if (error) return <div>Error</div>
+  if (error) return <div>An error occurred: {error.error}</div>
 
   const allAssignments = data.canvasAssignments
   const allModules = data.ladokModules
