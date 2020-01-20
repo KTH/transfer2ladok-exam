@@ -70,7 +70,7 @@ router.use(handleHtmlErrors)
 apiRouter.use(authorization.authorize)
 apiRouter.get('/course-info', listCourseData)
 apiRouter.get('/table', listGradesData)
-apiRouter.post('/submitGrades', authorization.denyActAs, submitGrades)
+apiRouter.post('/submitGrades', submitGrades)
 apiRouter.use(handleApiErrors)
 
 server.use(PROXY_PATH, router)

@@ -2,18 +2,6 @@ const log = require('skog')
 const isAllowed = require('../lib/is-allowed')
 const { ClientError } = require('../lib/errors')
 
-async function denyActAs (req, res, next) {
-  const accessData = req.accessData || req.signedCookies.access_data
-
-  if (accessData.realUserId && accessData.userId !== accessData.realUserId) {
-    throw new ClientError(
-      'not_allowed',
-      'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
-    )
-  }
-  next()
-}
-
 async function authorize (req, res, next) {
   const accessData = req.accessData || req.signedCookies.access_data
   const courseId = req.query.course_id || req.body.course_id
@@ -24,6 +12,13 @@ async function authorize (req, res, next) {
     throw new ClientError(
       'no_cookie',
       'No access data found in request or cookie.'
+    )
+  }
+
+  if (accessData.realUserId && accessData.userId !== accessData.realUserId) {
+    throw new ClientError(
+      'not_allowed',
+      'You are not allowed to use this app in Masquerade mode ("acting as" a different user)'
     )
   }
 
@@ -55,6 +50,5 @@ async function authorize (req, res, next) {
 }
 
 module.exports = {
-  authorize,
-  denyActAs
+  authorize
 }
