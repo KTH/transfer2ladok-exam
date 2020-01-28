@@ -52,7 +52,7 @@ function WizardConfirm ({
   )
 
   return (
-    <form>
+    <div>
       <h2>Transfer grades (Step 2 of 2)</h2>
       <p>
         The list below represents what the application will transfer from Canvas
@@ -76,7 +76,7 @@ function WizardConfirm ({
         />
       )}
       {showTable && tableFooter}
-    </form>
+    </div>
   )
 }
 
