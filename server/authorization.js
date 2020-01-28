@@ -47,7 +47,12 @@ async function authorize (req, res, next) {
       )
     }
   } catch (err) {
-    log.error('could not authorize user properly', err)
+    if (err.code && err.code === 'not_allowed') {
+      log.info('User is not authorized', err)
+    } else {
+      log.error('could not authorize user properly', err)
+    }
+
     return next(err)
   }
 
