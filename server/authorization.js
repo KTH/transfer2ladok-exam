@@ -43,7 +43,7 @@ async function authorize (req, res, next) {
     if (!allowedIncanvas) {
       throw new ClientError(
         'not_allowed',
-        'Only teachers and examiners are allowed to use this app. Contact it-support@kth.se if you need help.'
+        'Only teachers, examiners and course responsibles are allowed to use this app. Contact it-support@kth.se if you need help.'
       )
     }
   } catch (err) {
