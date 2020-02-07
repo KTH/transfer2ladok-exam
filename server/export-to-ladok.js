@@ -57,13 +57,10 @@ async function listCourseData (req, res) {
 
   const canvasAssignments = await getCanvasAssignments(
     courseId,
-    process.env.CANVAS_ADMIN_API_TOKEN
+    req.accessData.token
   )
 
-  const ladokModules = await getLadokModules(
-    courseId,
-    process.env.CANVAS_ADMIN_API_TOKEN
-  )
+  const ladokModules = await getLadokModules(courseId, req.accessData.token)
 
   res.send({
     canvasAssignments: canvasAssignments.map(assignment => ({

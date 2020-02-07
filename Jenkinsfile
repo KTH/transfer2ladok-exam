@@ -19,7 +19,6 @@ pipeline {
                 CANVAS_CLIENT_ID = credentials('CANVAS_CLIENT_ID_E2E')
                 CANVAS_CLIENT_SECRET = credentials('CANVAS_CLIENT_SECRET_E2E')
                 MONGODB_CONNECTION_STRING = credentials('MONGODB_CONNECTION_STRING')
-                CANVAS_ADMIN_API_TOKEN = credentials('CANVAS_API_TOKEN_2')
             }
             steps {
                 sh '$JENKINS_HOME/workspace/zermatt/jenkins/buildinfo-to-node-module.sh /config/version.js'
