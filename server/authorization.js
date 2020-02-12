@@ -28,7 +28,10 @@ async function authorize (req, res, next) {
   }
 
   try {
-    const allowedInLadok = await isAllowed.isAllowedInLadok(accessData.token)
+    const allowedInLadok = await isAllowed.isAllowedInLadok(
+      accessData.token,
+      courseId
+    )
     if (!allowedInLadok) {
       throw new ClientError(
         'not_allowed',
