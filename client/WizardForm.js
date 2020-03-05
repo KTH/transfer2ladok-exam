@@ -49,7 +49,11 @@ function WizardForm ({
     if (selectedAssignmentObject.grading_type !== 'letter_grade') {
       const canvasAssignmentLink = `${courseUrl}/assignments/${selectedAssignmentObject.id}/edit`
       assignmentWarning = (
-        <div className='alert alert-danger' aria-live='polite' role='alert'>
+        <div
+          className='alert alert-danger fadein'
+          aria-live='polite'
+          role='alert'
+        >
           You have chosen an assignment with{' '}
           <strong>{selectedAssignmentObject.grading_type}</strong> grading type.
           Only <strong>letter grades</strong> can be transferred to Ladok. If
