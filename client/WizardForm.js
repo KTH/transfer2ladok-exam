@@ -40,7 +40,7 @@ function WizardForm ({
     </button>
   )
 
-  let assignmentWarning = <p></p>
+  let assignmentWarning = <p />
   if (selectedAssignment) {
     const selectedAssignmentObject = allAssignments.find(
       a => a.id === Number(selectedAssignment.id)
