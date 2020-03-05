@@ -39,6 +39,29 @@ function WizardForm ({
     </button>
   )
 
+  let assignmentWarning = <p></p>
+  if (selectedAssignment) {
+    const selectedAssignmentObject = allAssignments.find(
+      a => a.id === Number(selectedAssignment.id)
+    )
+
+    if (selectedAssignmentObject.grading_type !== 'letter_grade') {
+      const canvasAssignmentLink = `${'TODO'}/assignments/${
+        selectedAssignmentObject.id
+      }`
+      assignmentWarning = (
+        <div className='alert alert-danger' aria-live='polite' role='alert'>
+          You have chosen an assignment with{' '}
+          <strong>{selectedAssignmentObject.grading_type}</strong> grading type.
+          Only letter grades can be transferred to Ladok. If you want to use
+          this assignment,{' '}
+          <a href={canvasAssignmentLink} target='_blank'>
+            you have to first change the "Display Grade as" to letter grade.
+          </a>
+        </div>
+      )
+    }
+  }
   return (
     <div className='form-group form-select'>
       <h1>Select assignment and date (Step 1 of 2)</h1>
@@ -91,6 +114,7 @@ function WizardForm ({
             ))}
         </select>
       </div>
+      {assignmentWarning}
       <h2>Ladok Module</h2>
       <p>To which Ladok module do you want the grades to be transferred?</p>
 
