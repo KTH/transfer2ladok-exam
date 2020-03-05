@@ -53,7 +53,7 @@ function WizardForm ({
           You have chosen an assignment with{' '}
           <strong>{selectedAssignmentObject.grading_type}</strong> grading type.
           Only <strong>letter grades</strong> can be transferred to Ladok. If
-          you want to use this assignment, you have to{' '}
+          you want to use this assignment, you should{' '}
           <a href={canvasAssignmentLink} target='_top'>
             edit the assignment
           </a>{' '}
