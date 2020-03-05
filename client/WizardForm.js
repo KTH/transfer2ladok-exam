@@ -9,7 +9,8 @@ function WizardForm ({
   allModules,
   selectedAssignment,
   setAssignment,
-  allAssignments
+  allAssignments,
+  courseUrl
 }) {
   let disabled = false
   let title = ''
@@ -46,18 +47,17 @@ function WizardForm ({
     )
 
     if (selectedAssignmentObject.grading_type !== 'letter_grade') {
-      const canvasAssignmentLink = `${'TODO'}/assignments/${
-        selectedAssignmentObject.id
-      }`
+      const canvasAssignmentLink = `${courseUrl}/assignments/${selectedAssignmentObject.id}/edit`
       assignmentWarning = (
         <div className='alert alert-danger' aria-live='polite' role='alert'>
           You have chosen an assignment with{' '}
           <strong>{selectedAssignmentObject.grading_type}</strong> grading type.
-          Only letter grades can be transferred to Ladok. If you want to use
-          this assignment,{' '}
+          Only <strong>letter grades</strong> can be transferred to Ladok. If
+          you want to use this assignment, you have to{' '}
           <a href={canvasAssignmentLink} target='_blank'>
-            you have to first change the "Display Grade as" to letter grade.
-          </a>
+            edit the assignment
+          </a>{' '}
+          and change "Display Grade as" to letter grade.
         </div>
       )
     }

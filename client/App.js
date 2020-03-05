@@ -20,6 +20,7 @@ function App ({ courseId }) {
 
   const allAssignments = data.canvasAssignments
   const allModules = data.ladokModules
+  const courseUrl = data.url
 
   if (currentPage === 0) {
     return (
@@ -39,6 +40,7 @@ function App ({ courseId }) {
         selectedAssignment={selectedAssignment}
         setAssignment={setAssignment}
         allAssignments={allAssignments}
+        courseUrl={courseUrl}
       />
     )
   } else if (currentPage === 2) {
