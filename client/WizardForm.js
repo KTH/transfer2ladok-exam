@@ -61,7 +61,9 @@ function WizardForm ({
           <a href={canvasAssignmentLink} target='_top'>
             edit the assignment
           </a>{' '}
-          and change "Display Grade as" to letter grade.
+          , change "Display Grade as" to letter grade, and choose either the
+          "A-F grading scheme (including Fx)" or the "Pass/Fail grading scheme
+          80%".
         </div>
       )
     }
