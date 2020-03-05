@@ -62,8 +62,8 @@ function WizardForm ({
             edit the assignment
           </a>{' '}
           , change "Display Grade as" to letter grade, and choose either the
-          "A-F grading scheme (including Fx)" or the "Pass/Fail grading scheme
-          80%".
+          <strong>"A-F grading scheme (including Fx)"</strong> or the{' '}
+          <strong>"Pass/Fail grading scheme 80%".</strong>
         </div>
       )
     }
