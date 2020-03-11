@@ -1,5 +1,9 @@
 // Read more: https://jenkins.io/doc/book/pipeline/jenkinsfile/
 pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
     agent any
 
     stages {
