@@ -25,6 +25,7 @@ pipeline {
                 MONGODB_CONNECTION_STRING = credentials('MONGODB_CONNECTION_STRING')
             }
             steps {
+                sh 'sudo /var/lib/jenkins/chown_jenkins.sh'
                 sh '$JENKINS_HOME/workspace/zermatt/jenkins/buildinfo-to-node-module.sh /config/version.js'
                 sh 'SLACK_CHANNELS="#team-e-larande-build,#pipeline-logs" DEBUG=True $EVOLENE_DIRECTORY/run.sh'
             }
