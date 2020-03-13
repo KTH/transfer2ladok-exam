@@ -63,6 +63,7 @@ async function listCourseData (req, res) {
   const ladokModules = await getLadokModules(courseId, req.accessData.token)
 
   res.send({
+    url: `${process.env.CANVAS_HOST}/courses/${courseId}`,
     canvasAssignments: canvasAssignments.map(assignment => ({
       published: assignment.published,
       muted: assignment.muted,
