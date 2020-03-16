@@ -11,6 +11,7 @@ RUN npm run build
 FROM kthse/kth-nodejs:12.0.0
 COPY . .
 COPY --from=0 /tmp/lms-export-to-ladok-2/dist ./dist
+RUN node -v
 RUN npm ci --only=production
 
 EXPOSE 3001
