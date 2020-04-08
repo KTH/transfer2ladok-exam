@@ -23,6 +23,10 @@ pipeline {
                 CANVAS_CLIENT_ID = credentials('CANVAS_CLIENT_ID_E2E')
                 CANVAS_CLIENT_SECRET = credentials('CANVAS_CLIENT_SECRET_E2E')
                 MONGODB_CONNECTION_STRING = credentials('MONGODB_CONNECTION_STRING')
+
+                // Since a successful run relies on environment varibles being set,
+                // we need to skip it for now.
+                SKIP_DRY_RUN="True"
             }
             steps {
                 sh 'sudo /var/lib/jenkins/chown_jenkins.sh'
