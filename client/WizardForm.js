@@ -88,8 +88,7 @@ function WizardForm ({
           name='canvas_assignment'
           onChange={event =>
             setAssignment({
-              id: event.target.value,
-              name: event.target.selectedOptions[0].text
+              id: event.target.value
             })
           }
         >
@@ -131,8 +130,7 @@ function WizardForm ({
           value={(selectedModule && selectedModule.id) || ''}
           onChange={event =>
             setModule({
-              id: event.target.value,
-              name: event.target.selectedOptions[0].text
+              id: event.target.value
             })
           }
         >

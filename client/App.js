@@ -22,6 +22,18 @@ function App ({ courseId }) {
   const allModules = data.ladokModules
   const courseUrl = data.url
 
+  if (!selectedModule && allModules.length === 1) {
+    setModule({ id: allModules[0].id })
+  }
+
+  if (
+    !examinationDate &&
+    allModules.length === 1 &&
+    allModules[0].examinationDate
+  ) {
+    setExaminationDate(allModules[0].examinationDate)
+  }
+
   if (currentPage === 0) {
     return (
       <h1 className='alert alert-success'>
