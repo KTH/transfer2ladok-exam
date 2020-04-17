@@ -23,7 +23,7 @@ function App ({ courseId }) {
   const courseUrl = data.url
 
   function setModuleId (moduleId) {
-    const module = allModules.find(m => m.id === parseInt(moduleId, 10))
+    const module = allModules.find(m => m.id === moduleId)
     setModule(module)
   }
 
