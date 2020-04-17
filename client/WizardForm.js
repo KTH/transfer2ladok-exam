@@ -86,11 +86,7 @@ function WizardForm ({
           className='custom-select'
           value={(selectedAssignment && selectedAssignment.id) || ''}
           name='canvas_assignment'
-          onChange={event =>
-            setAssignment({
-              id: event.target.value
-            })
-          }
+          onChange={event => setAssignment(event.target.value)}
         >
           <option value='' disabled hidden>
             Select assignment
@@ -128,11 +124,7 @@ function WizardForm ({
           className='custom-select'
           name='ladok_module'
           value={(selectedModule && selectedModule.id) || ''}
-          onChange={event =>
-            setModule({
-              id: event.target.value
-            })
-          }
+          onChange={event => setModule(event.target.value)}
         >
           <option value='' disabled hidden>
             Select Ladok module
