@@ -22,6 +22,7 @@ pipeline {
                 LADOK_API_PFX_PASSPHRASE = credentials('LADOK_API_PFX_PASSPHRASE')
                 CANVAS_CLIENT_ID = credentials('CANVAS_CLIENT_ID_E2E')
                 CANVAS_CLIENT_SECRET = credentials('CANVAS_CLIENT_SECRET_E2E')
+                CANVAS_ADMIN_API_TOKEN = credentials('CANVAS_API_TOKEN_2')
                 MONGODB_CONNECTION_STRING = credentials('MONGODB_CONNECTION_STRING')
 
                 // Since a successful run relies on environment varibles being set,
