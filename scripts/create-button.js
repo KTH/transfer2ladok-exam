@@ -63,9 +63,9 @@ async function start () {
     name: 'buttonUrl',
     message: 'Where is the app deployed?',
     choices: [
-      'http://localhost:3001/api/lms-export-to-ladok-2/export',
-      'https://api-r.referens.sys.kth.se/api/lms-export-to-ladok-2/export',
-      'https://api.kth.se/api/lms-export-to-ladok-2/export'
+      'http://localhost:3001/api/lms-transfer2ladok-exam/export',
+      'https://api-r.referens.sys.kth.se/api/lms-transfer2ladok-exam/export',
+      'https://api.kth.se/api/lms-transfer2ladok-exam/export'
     ]
   })
 
@@ -77,7 +77,7 @@ async function start () {
   const { buttonName } = await inquirer.prompt({
     name: 'buttonName',
     message: 'Select a name for the button',
-    default: 'KTH Överföring till Ladok (Beta)'
+    default: 'KTH Omtentaöverföring till Ladok'
   })
 
   const body = {

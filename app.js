@@ -1,8 +1,8 @@
 require('dotenv').config()
 require('@kth/reqvars').check()
 require('skog/bunyan').createLogger({
-  name: 'lms-export-to-ladok-2',
-  app: 'lms-export-to-ladok-2',
+  name: 'lms-transfer2ladok-exam',
+  app: 'lms-transfer2ladok-exam',
   serializers: require('bunyan').stdSerializers,
   level: process.env.LOG_LEVEL || 'info'
 })

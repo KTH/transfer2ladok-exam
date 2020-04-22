@@ -1,5 +1,5 @@
 {
-  "name": "lms-export-to-ladok-2",
+  "name": "lms-transfer2ladok-exam",
   "version": "1.0.0",
   "description": "Send results of an assignment in Canvas LMS as module in Ladok",
   "main": "app.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KTH/lms-export-to-ladok-2.git"
+    "url": "git+https://github.com/KTH/lms-transfer2ladok-exam.git"
   },
   "keywords": [],
   "author": "KTH Royal Institute of Technology",
