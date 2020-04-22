@@ -1,5 +1,6 @@
-# LMS Export to Ladok 2
+# Transfer to ladok - exam
 
 ## Copyright © 2019, [KTH](https://github.com/kth).
 
-Send results of an assignment in Canvas LMS as module in Ladok
+A _temporary_ special version of KTH Transfer to Ladok for working
+with the april 2020 reexams.
