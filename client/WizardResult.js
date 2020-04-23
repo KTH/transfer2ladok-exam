@@ -69,11 +69,8 @@ function WizardResult ({
       </div>
       <h2 className='success-h2'>Continue the grading process in Ladok</h2>
       <p>
-        The rest of the grading process is carried out in Ladok. Here is a{' '}
-        <a href={data.ladokLink} target='_blank' rel='noreferrer noopener'>
-          direct link
-        </a>{' '}
-        to the module in Ladok to which the grades have been transferred. <br />
+        The rest of the grading process is carried out in Ladok.
+        <br />
         <b>Note:</b> If you are prompted to log in to Ladok the first time you
         click the link you will have to click it again to arrive at the module
         in Ladok.
